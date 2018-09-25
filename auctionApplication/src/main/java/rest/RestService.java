@@ -1,3 +1,4 @@
+/*
 import java.net.URI;
 
 import javax.ejb.Stateless;
@@ -44,3 +45,4 @@ public class RestService {
 	}
 	
 }
+*/

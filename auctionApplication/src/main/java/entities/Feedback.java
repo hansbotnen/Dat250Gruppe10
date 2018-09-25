@@ -43,10 +43,10 @@ public class Feedback {
 		  return user;
 	  }
 	  
-	  public void setUser(User user) {
-		  this.user=user;
-		  if(!user.getFeedbacks().contains(this))
-			  user.addFeedback(this);
-			  
-	  }
+//	  public void setUser(User user) {
+//		  this.user=user;
+//		  if(!user.getFeedbacks().contains(this))
+//			  user.addFeedback(this);
+//			  
+//	  }
 	}

@@ -14,7 +14,7 @@ import entities.User;
 /*
  * Så langt lager den bare brukere og persister de
  */
-@Singleton
+//@Singleton
 @Startup
 public class LoadData {
 	

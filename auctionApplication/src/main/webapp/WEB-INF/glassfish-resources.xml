@@ -5,8 +5,8 @@
         <property name="serverName" value="localhost"/>
         <property name="portNumber" value="8080"/>
         <property name="databaseName" value="auctionApplication"/>
-        <property name="User" value=""/>
-        <property name="Password" value=""/>
+        <property name="User" value="admin"/>
+        <property name="Password" value="admin"/>
         <property name="connectionAttributes" value=";create=true" />
         <property name="URL" value="jdbc:derby://localhost:8080/auctionApplication;create=true"/>
         <property name="driverClass" value="org.apache.derby.jdbc.ClientDriver"/>

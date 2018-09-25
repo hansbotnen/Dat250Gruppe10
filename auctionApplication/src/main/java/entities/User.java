@@ -1,6 +1,17 @@
 package entities;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @NamedQueries({
@@ -18,6 +29,9 @@ public class User {
   private String phone;
   private float rating;
   private String email;
+  
+  @OneToMany(mappedBy = "user")
+  private List<Feedback> feedbacks;
 
   //Assume that address is its own table
   //private Address address;
@@ -33,6 +47,7 @@ public class User {
     this.phone = phone;
     this.rating = rating;
     this.email = email;
+    feedbacks = new ArrayList<>();
     
     
     //this.address = address;
@@ -90,6 +105,20 @@ public class User {
 
   public String getCity() {
     return city;
+  }
+  
+  public List<Feedback> getFeedbacks(){
+	  return feedbacks;
+  }
+  
+  public void setFeedbacks(List<Feedback> feedbacks) {
+	  this.feedbacks=feedbacks;
+  }
+  
+  public void addFeedback(Feedback feedback) {
+	  this.feedbacks.add(feedback);
+	  if(feedback.getUser() != this)
+		  feedback.setUser(this);
   }
 
   //If table Address is not used

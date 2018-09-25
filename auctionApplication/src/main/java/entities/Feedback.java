@@ -12,8 +12,8 @@ public class Feedback {
 
 	  private String feedback;
 
-	  /*@OneToOne
-	  @JoinColumn(name = "user_fk")*/
+	  @ManyToOne(fetch = FetchType.LAZY)
+	  @JoinColumn(name = "user_ID")
 	  private User user;
 
 	  @OneToOne(mappedBy = "feedback")
@@ -37,5 +37,16 @@ public class Feedback {
 
 	  public void setFeedback(String feedback) {
 	    this.feedback = feedback;
+	  }
+	  
+	  public User getUser() {
+		  return user;
+	  }
+	  
+	  public void setUser(User user) {
+		  this.user=user;
+		  if(!user.getFeedbacks().contains(this))
+			  user.addFeedback(this);
+			  
 	  }
 	}

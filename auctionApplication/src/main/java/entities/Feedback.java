@@ -12,22 +12,31 @@ public class Feedback {
 
 	  private String feedback;
 
-	  //Foreignkey
-	  //@OneToMany
-	  //User userId
+	  @OneToOne
+	  @JoinColumn(name = "user_fk")
+	  private User user;
 
-	  //@OneToMany
-	  //Product productId
+	  @OneToOne
+	  @JoinColumn(name = "product_fk")
+	  private Product product;
 
-	  public Feedback() {
-
+	  /**
+	   * 
+	   * @param user user that the feedback belongs to
+	   * @param product product that the feedback is for
+	   * @param feedback 
+	   */
+	  public Feedback(User user, Product product, String feedback) {
+		  this.user=user;
+		  this.product=product;
+		  this.feedback=feedback;
 	  }
 
 	  public String getFeedback() {
 	    return feedback;
 	  }
 
-	  public void setFeedback() {
+	  public void setFeedback(String feedback) {
 	    this.feedback = feedback;
 	  }
 	}

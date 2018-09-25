@@ -12,12 +12,11 @@ public class Feedback {
 
 	  private String feedback;
 
-	  @OneToOne
-	  @JoinColumn(name = "user_fk")
+	  /*@OneToOne
+	  @JoinColumn(name = "user_fk")*/
 	  private User user;
 
-	  @OneToOne
-	  @JoinColumn(name = "product_fk")
+	  @OneToOne(mappedBy = "feedback")
 	  private Product product;
 
 	  /**

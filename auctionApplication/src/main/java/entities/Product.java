@@ -16,6 +16,10 @@ public class Product {
   private String picture; //Changes to type Image
   private String features; //Description
   private Float productRating;
+  
+  @OneToOne
+  @JoinColumn(name = "feedback_fk")
+  private Feedback feedback;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date endTime; //java.util.Date || java.util.Calendar
@@ -64,4 +68,13 @@ public class Product {
   public void setPublish(Boolean publish) {
 	  this.published = publish; 
   }
+  
+  public void setFeedback(Feedback feedback) {
+	  this.feedback = feedback;
+  }
+  
+  public Feedback getFeedback() {
+	  return feedback;
+  }
+  
 }

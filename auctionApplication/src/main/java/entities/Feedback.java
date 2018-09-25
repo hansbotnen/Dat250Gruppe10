@@ -31,6 +31,8 @@ public class Feedback {
 		  this.feedback=feedback;
 	  }
 
+	  public Feedback() {}
+	  
 	  public String getFeedback() {
 	    return feedback;
 	  }

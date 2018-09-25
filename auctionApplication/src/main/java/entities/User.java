@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery(name = "findUser", query = "SELECT b From user b")
+	@NamedQuery(name = "findUser", query = "SELECT b From User b")
 })
 @Table(name="user")
 public class User {
@@ -48,6 +48,8 @@ public class User {
     //this.city = city;
     //this.zipcode = zipcode; 
   }
+  
+  public User() {}
 
   public int getId() {
     return userId;

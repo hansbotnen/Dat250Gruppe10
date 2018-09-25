@@ -4,5 +4,4 @@ import javax.validation.constraints.*;
 
 public class Bid {
 	
-	
 }

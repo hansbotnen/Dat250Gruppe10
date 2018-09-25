@@ -11,7 +11,6 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	 	<class>entities.Feedback</class>
 	 	<class>entities.Product</class>
 	 	<class>entities.ProductCatalog</class>
-	 	<class>entities.Bid</class>
 		<properties>
       		<property name="javax.persistence.schema-generation.database.action" value="create"/>
 		</properties>

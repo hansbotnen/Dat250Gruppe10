@@ -3,6 +3,9 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 @Entity
+@NamedQueries({
+	@NamedQuery(name = "findUser", query = "SELECT b From user b")
+})
 @Table(name="user")
 public class User {
   @Id

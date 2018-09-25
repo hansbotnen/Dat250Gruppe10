@@ -10,6 +10,10 @@ public class ProductCatalog{
 
   //Foreignkey: userId
 
+  
+  
   private String catalogName;
+  
+  
 }
 

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery(name = "findUser", query = "SELECT b From User b")
+	@NamedQuery(name = "findAccount", query = "SELECT b From Account b")
 })
 @Table(name="account")
 public class Account {
@@ -39,9 +39,9 @@ public class Account {
   //Product product //A list of product
 
   //Otherwise
-  private String address;
+ /*private String address;
   private String city;
-  private String zipcode;
+  private String zipcode;*/
 
   public Account(String name, String phone, float rating, String email) {
     this.name = name;
@@ -97,7 +97,7 @@ public class Account {
     this.email = email;
   }
 
-  public String getAddress() {
+ /* public String getAddress() {
     return address;
   }
 
@@ -107,7 +107,7 @@ public class Account {
 
   public String getCity() {
     return city;
-  }
+  }*/
 
 	public void addFeedback(Feedback feedback) {
 		feedbacks.add(feedback);

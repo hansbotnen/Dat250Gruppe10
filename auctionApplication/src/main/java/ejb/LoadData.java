@@ -26,8 +26,10 @@ public class LoadData {
 	public void createData() {
 		int numberOfAccounts = 10;
 		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
+		assert(accounts.size()==numberOfAccounts);
 		
 		accounts.forEach(s->em.persist(s));
+		em.flush();
 	}
 	
 	private ArrayList<Account> generateAccounts(int n) {

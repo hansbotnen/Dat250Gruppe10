@@ -1,4 +1,6 @@
 package entities;
+import java.util.ArrayList;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -27,6 +29,10 @@ public class User {
   
   @Column(name="email")
   private String email;
+  
+  @Column(name="feedback")
+  @OneToMany(mappedBy = "user")
+  private ArrayList<Feedback> feedbacks;
 
   //Assume that address is its own table
   //private Address address;
@@ -102,6 +108,25 @@ public class User {
   public String getCity() {
     return city;
   }
+
+	public void addFeedback(Feedback feedback) {
+		feedbacks.add(feedback);
+		if(!feedback.getUser().equals(this))
+			feedback.setUser(this);
+		
+	}
+	
+	public ArrayList<Feedback> getFeedbacks(){
+		return feedbacks;
+	}
+	
+	public void setFeedbacks(ArrayList<Feedback> feedbacks) {
+		this.feedbacks=feedbacks;
+		feedbacks.forEach(f->f.setUser(this));
+	}
+	
+
+
 
   //If table Address is not used
   // public void setCity(String city) {

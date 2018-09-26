@@ -8,6 +8,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	   	 <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 		<jta-data-source>java:app/jdbc/auctionApplication</jta-data-source>
 	 	<class>entities.User</class>
+	 	<class>entities.Account</class>
 	 	<class>entities.Feedback</class>
 	 	<class>entities.Product</class>
 	 	<class>entities.ProductCatalog</class>

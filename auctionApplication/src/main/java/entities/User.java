@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
 	@NamedQuery(name = "findUser", query = "SELECT b From User b")
 })
-@Table(name="user")
+@Table(name="account")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,9 +30,9 @@ public class User {
   @Column(name="email")
   private String email;
   
-  @JoinColumn(name="feedback")
+  /*@JoinColumn(name="feedback")
   @OneToMany(mappedBy = "user")
-  private ArrayList<Feedback> feedbacks;
+  private ArrayList<Feedback> feedbacks;*/
 
   //Assume that address is its own table
   //private Address address;
@@ -109,7 +109,7 @@ public class User {
     return city;
   }
 
-	public void addFeedback(Feedback feedback) {
+	/*public void addFeedback(Feedback feedback) {
 		feedbacks.add(feedback);
 		if(!feedback.getUser().equals(this))
 			feedback.setUser(this);
@@ -123,7 +123,7 @@ public class User {
 	public void setFeedbacks(ArrayList<Feedback> feedbacks) {
 		this.feedbacks=feedbacks;
 		feedbacks.forEach(f->f.setUser(this));
-	}
+	}*/
 	
 
 

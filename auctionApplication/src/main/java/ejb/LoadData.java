@@ -10,6 +10,7 @@ import javax.ejb.Startup;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import entities.Account;
 import entities.User;
 /*
  * Så langt lager den bare brukere og persister de
@@ -23,13 +24,13 @@ public class LoadData {
 	
 	@PostConstruct
 	public void createData() {
-		int numberOfUsers = 10;
-		ArrayList<User> users = generateUsers(numberOfUsers);
+		int numberOfAccounts = 10;
+		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
 		
-		users.forEach(s->em.persist(s));
+		accounts.forEach(s->em.persist(s));
 	}
 	
-	private ArrayList<User> generateUsers(int n) {
+	private ArrayList<Account> generateAccounts(int n) {
 		ArrayList<String> maleNames = new ArrayList<>();
 		Collections.addAll(maleNames, "Hans","Joakim","Mikal","Phillip","Magnus","Truls","Rolf",
 				"Nils","Ola","Jan", "Jon", "Bendik", "Aksel", "Per","Paal","Espen", "Ivar", 
@@ -49,7 +50,7 @@ public class LoadData {
 		ArrayList<String> emailSuffix = new ArrayList<>();
 		Collections.addAll(emailSuffix, "@gmail.com", "@hotmail.no","@uib.no","@google.com");
 		
-		ArrayList<User> users = new ArrayList<>();
+		ArrayList<Account> accounts = new ArrayList<>();
 		Random rand=new Random();
 		
 		//Just to avoid adding multiple dummy-users with the same name
@@ -74,13 +75,13 @@ public class LoadData {
 				String email = name.toLowerCase().replaceAll(" ", "")
 						+ emailSuffix.get(rand.nextInt(emailSuffix.size()));
 				
-				users.add(new User(name,phoneNumber,rating,email));
+				accounts.add(new Account(name,phoneNumber,rating,email));
 				
 			}
 			else
 				i--; //make new random user
 		}
-		return users;
+		return accounts;
 	}
 	
 }

@@ -25,8 +25,18 @@ public class RestService {
 	
 	@Context
 	private UriInfo uriInfo;
-	@PersistenceContext(unitName = "auction")
+	@PersistenceContext(unitName = "auctionApplication")
 	private EntityManager em;
+	
+	@GET
+	@Path("/{id}/get")
+	public Product getProduct(@PathParam("id") int id) {
+		return product.get(id);
+	}
+	
+	@GET
+	@Path("auctions/{id}/bids")
+	public Auction getBid(@PathParam("id") int 
 	
 	@GET
 	@Produces(MediaType.APPLICATION_XML)

@@ -18,7 +18,7 @@ import entities.User;
 @Startup
 public class LoadData {
 	
-	@PersistenceContext(unitName = "AppPU")
+	@PersistenceContext(unitName = "auctionApplication")
 	private EntityManager em;
 	
 	@PostConstruct

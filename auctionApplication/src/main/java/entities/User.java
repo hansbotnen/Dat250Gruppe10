@@ -30,7 +30,7 @@ public class User {
   @Column(name="email")
   private String email;
   
-  @Column(name="feedback")
+  @JoinColumn(name="feedback")
   @OneToMany(mappedBy = "user")
   private ArrayList<Feedback> feedbacks;
 

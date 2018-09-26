@@ -11,12 +11,13 @@ public class Feedback {
 
 
 	  private String feedback;
-
+	  
 	  @ManyToOne(fetch = FetchType.LAZY)
 	  @JoinColumn(name = "userId")
 	  private User user;
-
+	  
 	  @OneToOne(mappedBy = "feedback")
+	  @JoinColumn(name = "product")
 	  private Product product;
 
 	  /**

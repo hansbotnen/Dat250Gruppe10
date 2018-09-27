@@ -24,6 +24,7 @@ import entities.Account;
 import entities.Accounts;
 import entities.Bid;
 import entities.Product;
+import entities.Products;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -52,23 +53,19 @@ public class RestService {
 		return Response.ok("Hello World!").build();
 	}
 	
+	/********************************************************
+	 * 														*
+	 *				REST services for Account				*
+	 *														*
+	 ********************************************************/
 	
 	@GET
 	@Path("/accounts")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Accounts getAccounts() {
-		
 		TypedQuery<Account> query = em.createNamedQuery(Account.FIND_ALL, Account.class);
 		Accounts accounts = new Accounts(query.getResultList());
 		return accounts;
-	}
-
-	@GET
-	@Produces(MediaType.APPLICATION_XML)
-	public Response getProduct() {
-		TypedQuery<Product> query = em.createNamedQuery(Product.FIND_ALL, Product.class);
-		List<Product> product = query.getResultList();
-		return Response.ok(product).build();
 	}
 	
 	@POST
@@ -81,17 +78,44 @@ public class RestService {
 		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
 		return Response.created(accountUri).build();
 	}
+	
+	@GET
+	@Path("/accounts/{id}")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response getAccoundId(@PathParam("id") String id) {
+		int idInt = Integer.parseInt(id);
+		Account account = em.find(Account.class, idInt);
+		if (account == null)
+			throw new NotFoundException();
+		return Response.ok(account).build();
+	}
+	
+	/********************************************************
+	 * 														*
+	 *		REST services for Product (FIX THIS PLS)		*
+	 *			Kan ikke hente ut data fra Product			*
+	 ********************************************************/
+	
 
-//	@GET
-//	@Path("{id}")
-//	public Response getProduct(@PathParam("id") String id) {
-//		int idInt = Integer.parseInt(id);
-//		Product product = em.find(Product.class, idInt);
-//		if (product == null)
-//			throw new NotFoundException();
-//		return Response.ok(product).build();
-//	}
-//	
+	@GET
+	@Path("/products")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Products getProducts() {
+		TypedQuery<Product> query = em.createNamedQuery(Product.FIND_ALL, Product.class);
+		Products products = new Products(query.getResultList());
+		return products;
+	}
+	
+	@GET
+	@Path("/products/{id}")
+	public Response getProduct(@PathParam("id") String id) {
+		int idInt = Integer.parseInt(id);
+		Product product = em.find(Product.class, idInt);
+		if (product == null)
+			throw new NotFoundException();
+		return Response.ok(product).build();
+	}
+	
 //	@GET
 //	@Path("{id}/bids")
 //	public Response getBid(@PathParam("id") String id) {

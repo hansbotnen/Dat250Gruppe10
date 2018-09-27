@@ -1,85 +1,90 @@
 package entities;
+
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement
+@NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT b From Product b") })
 @Table(name = "product")
-@NamedQueries({
-	@NamedQuery(name = "Product.findAll", query = "SELECT b From Product b")
-})
-public class Product {
+public class Product implements Serializable {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
+	private static final long serialVersionUID = 1L;
 
-  private String productName;
-  private String picture; //Changes to type Image
-  private String features; //Description
-  private Float productRating;
-  
-  @OneToOne
-  @JoinColumn(name = "feedback_fk")
-  private Feedback feedback;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-  @Temporal(TemporalType.TIMESTAMP)
-  private Date endTime; //java.util.Date || java.util.Calendar
+	private String productName;
+	private String picture; // Changes to type Image
+	private String features; // Description
+	private Float productRating;
 
-  private Boolean published;
-  
-  public static final String FIND_ALL = "Product.findAll";
+	@OneToOne
+	@JoinColumn(name = "feedback_fk")
+	private Feedback feedback;
 
-  public Product() {}
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date endTime; // java.util.Date || java.util.Calendar
 
-  public String getProductName() {
-    return productName;
-  }
+	private Boolean published;
 
-  public void setProductName() {
-    this.productName = productName;
-  }
+	public static final String FIND_ALL = "Product.findAll";
 
-  //Must change to type Image
-  public String getPicture() {
-    return picture;
-  }
+	public Product() {
+	}
 
-  public void setPicture(String picture) {
-    this.picture = picture;
-  }
+	public String getProductName() {
+		return productName;
+	}
 
-  public String getFeatures() {
-    return features;
-  }
+	public void setProductName() {
+		this.productName = productName;
+	}
 
-  public void setFeatures(String features) {
-    this.features = features;
-  }
+	// Must change to type Image
+	public String getPicture() {
+		return picture;
+	}
 
-  private Float getProductRating() {
-    return productRating;
-  }
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
-  public void setProductRating(Float productRating) {
-    this.productRating = productRating;
-  }
-  
-  public Boolean isPublished() {
-	  return published;
-  }
-  
-  public void setPublish(Boolean publish) {
-	  this.published = publish; 
-  }
-  
-  public void setFeedback(Feedback feedback) {
-	  this.feedback = feedback;
-  }
-  
-  public Feedback getFeedback() {
-	  return feedback;
-  }
-  
+	public String getFeatures() {
+		return features;
+	}
+
+	public void setFeatures(String features) {
+		this.features = features;
+	}
+
+	private Float getProductRating() {
+		return productRating;
+	}
+
+	public void setProductRating(Float productRating) {
+		this.productRating = productRating;
+	}
+
+	public Boolean isPublished() {
+		return published;
+	}
+
+	public void setPublish(Boolean publish) {
+		this.published = publish;
+	}
+
+	public void setFeedback(Feedback feedback) {
+		this.feedback = feedback;
+	}
+
+	public Feedback getFeedback() {
+		return feedback;
+	}
+
 }

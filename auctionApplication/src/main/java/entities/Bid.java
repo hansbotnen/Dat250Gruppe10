@@ -1,6 +1,7 @@
 package entities;
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @NamedQueries({
@@ -16,10 +17,10 @@ public class Bid {
 	private int bidAmount; 
 	
 	@ManyToOne
-	private Product products;
+	private @XmlTransient Product products;
 	
 	@OneToOne
-	private Account account; 
+	private @XmlTransient Account account; 
 	
 	public Bid() {}
 	
@@ -34,8 +35,7 @@ public class Bid {
 	public void setBidAmount() {
 		this.bidAmount = bidAmount;
 	}
-	
-	
+
 	public int getAccountId() {
 		return account.getId();
 	}

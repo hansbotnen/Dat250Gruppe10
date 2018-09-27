@@ -22,7 +22,7 @@ public class Product implements Serializable {
 	private String productName;
 	private String picture; // Changes to type Image
 	private String features; // Description
-	private Float productRating;
+	private double productRating;
 
 	@OneToOne
 	@JoinColumn(name = "feedback_fk")
@@ -42,7 +42,7 @@ public class Product implements Serializable {
 		return productName;
 	}
 
-	public void setProductName() {
+	public void setProductName(String productName) {
 		this.productName = productName;
 	}
 
@@ -63,12 +63,12 @@ public class Product implements Serializable {
 		this.features = features;
 	}
 
-	private Float getProductRating() {
+	private double getProductRating() {
 		return productRating;
 	}
 
-	public void setProductRating(Float productRating) {
-		this.productRating = productRating;
+	public void setProductRating(double d) {
+		this.productRating = d;
 	}
 
 	public Boolean isPublished() {

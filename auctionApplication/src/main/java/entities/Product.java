@@ -6,6 +6,9 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "product")
+@NamedQueries({
+	@NamedQuery(name = "Product.findAll", query = "SELECT b From Product b")
+})
 public class Product {
 
   @Id
@@ -25,6 +28,8 @@ public class Product {
   private Date endTime; //java.util.Date || java.util.Calendar
 
   private Boolean published;
+  
+  public static final String FIND_ALL = "Product.findAll";
 
   public Product() {}
 

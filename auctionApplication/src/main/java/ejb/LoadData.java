@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entities.Account;
-import entities.User;
 /*
  * Så langt lager den bare brukere og persister de
  */

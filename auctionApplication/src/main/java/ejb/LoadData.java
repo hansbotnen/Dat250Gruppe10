@@ -14,7 +14,7 @@ import entities.Account;
 /*
  * Så langt lager den bare brukere og persister de
  */
-//@Singleton
+@Singleton
 @Startup
 public class LoadData {
 	
@@ -23,12 +23,14 @@ public class LoadData {
 	
 	@PostConstruct
 	public void createData() {
-		int numberOfAccounts = 10;
-		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
-		assert(accounts.size()==numberOfAccounts);
+//		int numberOfAccounts = 10;
+//		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
+//		assert(accounts.size()==numberOfAccounts);
+//		
+//		accounts.forEach(s->em.persist(s));
+//		em.flush();
 		
-		accounts.forEach(s->em.persist(s));
-		em.flush();
+		
 	}
 	
 	private ArrayList<Account> generateAccounts(int n) {

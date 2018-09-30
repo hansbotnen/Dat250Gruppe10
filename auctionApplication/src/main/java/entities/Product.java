@@ -17,7 +17,7 @@ public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int productId;
 
 	private String productName;
 	private String picture; // Changes to type Image
@@ -36,6 +36,10 @@ public class Product implements Serializable {
 	public static final String FIND_ALL = "Product.findAll";
 
 	public Product() {
+	}
+	
+	public int getId() {
+		return productId;
 	}
 
 	public String getProductName() {

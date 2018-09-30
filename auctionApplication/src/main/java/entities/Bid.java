@@ -17,10 +17,12 @@ public class Bid {
 	private int bidAmount; 
 	
 	@ManyToOne
-	private @XmlTransient Product products;
+	@XmlTransient
+	private Product products;
 	
 	@OneToOne
-	private @XmlTransient Account account; 
+	@XmlTransient 
+	private Account account; 
 	
 	public Bid() {}
 	
@@ -32,7 +34,7 @@ public class Bid {
 		return bidAmount;
 	}
 	
-	public void setBidAmount() {
+	public void setBidAmount(int bidAmount) {
 		this.bidAmount = bidAmount;
 	}
 

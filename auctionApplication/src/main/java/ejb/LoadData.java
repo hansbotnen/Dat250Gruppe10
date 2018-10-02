@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entities.Account;
+import entities.ProductCatalog;
 /*
  * Så langt lager den bare brukere og persister de
  */
@@ -23,11 +24,20 @@ public class LoadData {
 	
 	@PostConstruct
 	public void createData() {
-//		int numberOfAccounts = 10;
-//		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
-//		assert(accounts.size()==numberOfAccounts);
+		int numberOfAccounts = 1;
+		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
+		assert(accounts.size()==numberOfAccounts);
+		
+		accounts.forEach(s->em.persist(s));
+		em.flush();
+		
 //		
-//		accounts.forEach(s->em.persist(s));
+//		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
+//		ProductCatalog pc1 = new ProductCatalog("Philips Catalog", acc1);
+//		
+//		em.persist(acc1);
+//		em.persist(pc1);
+//		
 //		em.flush();
 		
 		

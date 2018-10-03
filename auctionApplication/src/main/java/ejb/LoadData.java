@@ -33,13 +33,11 @@ public class LoadData {
 
 		
 //		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
-//		ProductCatalog pc1 = new ProductCatalog("Philips Catalog", acc1);
 //		
 //		em.persist(acc1);
-//		em.persist(pc1);
 //		
 //		em.flush();
-		
+//		
 		
 	}
 	

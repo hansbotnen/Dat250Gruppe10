@@ -22,7 +22,7 @@ public class Product implements Serializable {
 	private String productName;
 	private String picture; // Changes to type Image
 	private String features; // Description
-	private double productRating;
+	private Boolean published = false;
 
 //	@OneToOne
 //	@JoinColumn(name = "feedback_fk")
@@ -34,11 +34,15 @@ public class Product implements Serializable {
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Bid bid;
 
-	private Boolean published;
-
 	public static final String FIND_ALL = "Product.findAll";
 
 	public Product() {
+	}
+	
+	public Product(String productName, String picture, String features) {
+		this.productName = productName;
+		this.picture = picture;
+		this.features = features; 
 	}
 	
 	public int getId() {
@@ -68,14 +72,6 @@ public class Product implements Serializable {
 
 	public void setFeatures(String features) {
 		this.features = features;
-	}
-
-	private double getProductRating() {
-		return productRating;
-	}
-
-	public void setProductRating(double d) {
-		this.productRating = d;
 	}
 
 	public Boolean isPublished() {

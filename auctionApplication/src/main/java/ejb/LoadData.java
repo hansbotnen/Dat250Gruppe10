@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entities.Account;
+import entities.Product;
 import entities.ProductCatalog;
 /*
  * Så langt lager den bare brukere og persister de
@@ -32,12 +33,18 @@ public class LoadData {
 		em.flush();
 
 		
-//		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
-//		
-//		em.persist(acc1);
-//		
-//		em.flush();
-//		
+		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
+		Product p1 = new Product("Bok", "bok1.jpg", "Novelle");
+		ProductCatalog pc1 = new ProductCatalog("Phils Catalog", acc1);
+		
+//		pc1.addProduct(p1); This is fucking things up 
+		
+		em.persist(acc1);
+		em.persist(p1);
+		em.persist(pc1);
+		
+		em.flush();
+		
 		
 	}
 	

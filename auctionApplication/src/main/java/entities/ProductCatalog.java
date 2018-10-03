@@ -19,7 +19,7 @@ public class ProductCatalog implements Serializable {
 
 	private String catalogName;
 	
-//	@OneToOne
+	@OneToOne
 	private Account account; 
 	
 //	@OneToMany
@@ -51,5 +51,13 @@ public class ProductCatalog implements Serializable {
 	public Account getAccount() {
 		return account;
 	}
+	
+//	public void addProduct(Product product) {
+//		catalog.add(product);
+//	}
+//	
+//	public ArrayList<Product> getCatalog() {
+//		return catalog;
+//	}
 	
 }

@@ -92,8 +92,8 @@ public class RestService {
 	
 	/********************************************************
 	 * 														*
-	 *		REST services for Product (FIX THIS PLS)		*
-	 *			Kan ikke hente ut data fra Product			*
+	 *				REST services for Product 				*
+	 *														*
 	 ********************************************************/
 	
 
@@ -106,6 +106,17 @@ public class RestService {
 		return products;
 	}
 	
+	@POST
+	@Path("/products")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response createProduct(Product product) {
+		if (product == null)
+			throw new BadRequestException();
+		em.persist(product);
+		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getId())).build();
+		return Response.created(productUri).build();
+	}
+	
 	@GET
 	@Path("/products/{id}")
 	public Response getProduct(@PathParam("id") String id) {
@@ -115,6 +126,12 @@ public class RestService {
 			throw new NotFoundException();
 		return Response.ok(product).build();
 	}
+	
+	/********************************************************
+	 * 														*
+	 *				REST services for Bids	 				*
+	 *														*
+	 ********************************************************/
 
 	@POST
 	@Path("/bids")
@@ -123,8 +140,8 @@ public class RestService {
 		if (bid == null)
 			throw new BadRequestException();
 		em.persist(bid);
-		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getId())).build();
-		return Response.created(accountUri).build();
+		URI bidUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getId())).build();
+		return Response.created(bidUri).build();
 	}
 	
 	@GET

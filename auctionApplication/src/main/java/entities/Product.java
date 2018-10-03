@@ -31,6 +31,9 @@ public class Product implements Serializable {
 //	@Temporal(TemporalType.TIMESTAMP)
 //	private Date endTime; // java.util.Date || java.util.Calendar
 
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Bid bid;
+
 	private Boolean published;
 
 	public static final String FIND_ALL = "Product.findAll";
@@ -81,6 +84,10 @@ public class Product implements Serializable {
 
 	public void setPublish(Boolean publish) {
 		this.published = publish;
+	}
+	
+	public Bid getBid() {
+		return bid;
 	}
 
 //	public void setFeedback(Feedback feedback) {

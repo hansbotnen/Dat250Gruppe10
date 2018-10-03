@@ -127,6 +127,19 @@ public class RestService {
 		return Response.ok(product).build();
 	}
 	
+	@GET
+	@Path("/products/{pid}/bids/{bid}")
+	public Response getBidFromProduct(@PathParam("pid") String pid, @PathParam("bid") String bid) {
+		int pidInt = Integer.parseInt(pid);
+		int bidInt = Integer.parseInt(bid);
+		
+		Product product = em.find(Product.class, pidInt);
+		if (product == null)
+			throw new NotFoundException();
+		return null;
+		
+	}
+	
 	/********************************************************
 	 * 														*
 	 *				REST services for Bids	 				*

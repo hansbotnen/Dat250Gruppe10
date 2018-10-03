@@ -19,7 +19,7 @@ public class Bid {
 	private int bidAmount; 
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
-//	@XmlTransient
+	@XmlTransient
 	private Product product;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)

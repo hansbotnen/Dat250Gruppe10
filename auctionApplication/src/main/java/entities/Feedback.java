@@ -17,9 +17,9 @@ public class Feedback {
 	  @JoinColumn(name = "accountId")
 	  private Account account;
 	  
-	  @OneToOne(mappedBy = "feedback")
-	  @JoinColumn(name = "product")
-	  private Product product;
+//	  @OneToOne(mappedBy = "feedback")
+//	  @JoinColumn(name = "product")
+//	  private Product product;
 
 	  /**
 	   * 
@@ -29,7 +29,7 @@ public class Feedback {
 	   */
 	  public Feedback(Account account, Product product, String feedback) {
 		  this.account=account;
-		  this.product=product;
+//		  this.product=product;
 		  this.feedback=feedback;
 	  }
 
@@ -47,10 +47,10 @@ public class Feedback {
 		  return account;
 	  }
 	  
-	  public void setAccount(Account account) {
-		  this.account=account;
-		  if(!account.getFeedbacks().contains(this))
-			  account.addFeedback(this);
-			  
-	  }
+//	  public void setAccount(Account account) {
+//		  this.account=account;
+//		  if(!account.getFeedbacks().contains(this))
+//			  account.addFeedback(this);
+//			  
+//	  }
 	}

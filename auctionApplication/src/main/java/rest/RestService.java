@@ -115,16 +115,28 @@ public class RestService {
 			throw new NotFoundException();
 		return Response.ok(product).build();
 	}
+
+	@POST
+	@Path("/bids")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response createBid(Bid bid) {
+		if (bid == null)
+			throw new BadRequestException();
+		em.persist(bid);
+		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getId())).build();
+		return Response.created(accountUri).build();
+	}
 	
-//	@GET
-//	@Path("{id}/bids")
-//	public Response getBid(@PathParam("id") String id) {
-//		int idInt = Integer.parseInt(id);
-//		Bid bid = em.find(Bid.class, idInt);
-//		if (bid == null)
-//			throw new NotFoundException();
-//		return Response.ok(bid).build();
-//	} 
+	@GET
+	@Path("/bids/{id}")
+	public Response getBid(@PathParam("id") String id) {
+		int idInt = Integer.parseInt(id);
+		Bid bid = em.find(Bid.class, idInt);
+		if (bid == null)
+			throw new NotFoundException();
+		return Response.ok(bid).build();
+	} 
+	
 //	/*TODO
 //	@POST
 //	@Consumes(MediaType.APPLICATION_XML)

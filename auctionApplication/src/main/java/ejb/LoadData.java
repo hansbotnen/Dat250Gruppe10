@@ -24,14 +24,14 @@ public class LoadData {
 	
 	@PostConstruct
 	public void createData() {
-		int numberOfAccounts = 1;
+		int numberOfAccounts = 10;
 		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
 		assert(accounts.size()==numberOfAccounts);
 		
 		accounts.forEach(s->em.persist(s));
 		em.flush();
+
 		
-//		
 //		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
 //		ProductCatalog pc1 = new ProductCatalog("Philips Catalog", acc1);
 //		

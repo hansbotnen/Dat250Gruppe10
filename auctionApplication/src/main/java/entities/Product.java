@@ -24,12 +24,12 @@ public class Product implements Serializable {
 	private String features; // Description
 	private double productRating;
 
-	@OneToOne
-	@JoinColumn(name = "feedback_fk")
-	private Feedback feedback;
+//	@OneToOne
+//	@JoinColumn(name = "feedback_fk")
+//	private Feedback feedback;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date endTime; // java.util.Date || java.util.Calendar
+//	@Temporal(TemporalType.TIMESTAMP)
+//	private Date endTime; // java.util.Date || java.util.Calendar
 
 	private Boolean published;
 
@@ -83,12 +83,12 @@ public class Product implements Serializable {
 		this.published = publish;
 	}
 
-	public void setFeedback(Feedback feedback) {
-		this.feedback = feedback;
-	}
-
-	public Feedback getFeedback() {
-		return feedback;
-	}
+//	public void setFeedback(Feedback feedback) {
+//		this.feedback = feedback;
+//	}
+//
+//	public Feedback getFeedback() {
+//		return feedback;
+//	}
 
 }

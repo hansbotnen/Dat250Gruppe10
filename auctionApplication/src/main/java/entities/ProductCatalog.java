@@ -19,11 +19,11 @@ public class ProductCatalog implements Serializable {
 
 	private String catalogName;
 	
-	@OneToOne
+//	@OneToOne
 	private Account account; 
 	
-	@OneToMany
-	private ArrayList<Product> catalog;
+//	@OneToMany
+//	private ArrayList<Product> catalog;
 	
 	public ProductCatalog() {}
 	

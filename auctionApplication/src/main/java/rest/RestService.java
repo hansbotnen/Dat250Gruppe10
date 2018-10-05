@@ -20,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import ejb.AuctionDao;
 import entities.Account;
 import entities.Accounts;
 import entities.Bid;
@@ -110,11 +111,7 @@ public class RestService {
 	@Path("/products")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createProduct(Product product) {
-		if (product == null)
-			throw new BadRequestException();
-		em.persist(product);
-		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getId())).build();
-		return Response.created(productUri).build();
+		return Response.created(AuctionDao.getAllProducts(product)).build();
 	}
 	
 	@GET

@@ -32,17 +32,24 @@ public class Product implements Serializable {
 //	private Date endTime; // java.util.Date || java.util.Calendar
 
 	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "bid_fk")
 	private Bid bid;
 
 	public static final String FIND_ALL = "Product.findAll";
 
-	public Product() {
-	}
+	public Product() {}
 	
 	public Product(String productName, String picture, String features) {
 		this.productName = productName;
 		this.picture = picture;
 		this.features = features; 
+	}
+	
+	public Product(String productName, String picture, String features, Bid bid) {
+		this.productName = productName;
+		this.picture = picture;
+		this.features = features; 
+		this.bid = bid;
 	}
 	
 	public int getId() {
@@ -84,6 +91,10 @@ public class Product implements Serializable {
 	
 	public Bid getBid() {
 		return bid;
+	}
+	
+	public void setBid(Bid bid) { 
+		this.bid = bid;
 	}
 
 //	public void setFeedback(Feedback feedback) {

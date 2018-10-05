@@ -22,8 +22,10 @@ public class ProductCatalog implements Serializable {
 	@OneToOne
 	private Account account; 
 	
-//	@OneToMany
-//	private ArrayList<Product> catalog;
+	@OneToMany(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	private ArrayList<Product> catalog = new ArrayList<Product>();
 	
 	public ProductCatalog() {}
 	
@@ -32,7 +34,7 @@ public class ProductCatalog implements Serializable {
 		this.account = account;
 	}
 	
-	public int getCatalogId() {
+	public int getId() {
 		return catalogId;
 	}
 	
@@ -52,12 +54,21 @@ public class ProductCatalog implements Serializable {
 		return account;
 	}
 	
-//	public void addProduct(Product product) {
-//		catalog.add(product);
-//	}
-//	
-//	public ArrayList<Product> getCatalog() {
-//		return catalog;
-//	}
+	public void addProduct(Product product) {
+		catalog.add(product);
+	}
+	
+	public Product getProductFromCatalog(int id) {
+		Product product = null;
+		for (Product p : catalog) {
+			if (p.getId() == id) 
+				product = p;
+			else 
+				throw new NullPointerException();
+		}
+		
+		return product;
+	}
+	
 	
 }

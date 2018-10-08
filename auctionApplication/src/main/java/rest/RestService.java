@@ -65,7 +65,7 @@ public class RestService {
 	
 	/********************************************************
 	 * 														*
-	 *				REST services for Account				*
+	 *				RESTservices for Account				*
 	 *														*
 	 ********************************************************/
 	
@@ -79,7 +79,7 @@ public class RestService {
 	}
 	
 	@GET
-	@Path("/accounts")
+	@Path("/accounts/json")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Accounts getAccountsJSON() {
 		TypedQuery<Account> query = em.createNamedQuery(Account.FIND_ALL, Account.class);
@@ -112,7 +112,7 @@ public class RestService {
 	
 	/********************************************************
 	 * 														*
-	 *				REST services for Product 				*
+	 *				RESTservices for Product 				*
 	 *														*
 	 ********************************************************/
 	
@@ -162,7 +162,7 @@ public class RestService {
 	
 	/********************************************************
 	 * 														*
-	 *				REST services for Bids	 				*
+	 *				RESTservices for Bids	 				*
 	 *														*
 	 ********************************************************/
 

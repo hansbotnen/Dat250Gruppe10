@@ -23,7 +23,7 @@ public class Product implements Serializable {
 	private String picture; // Changes to type Image
 	private String features; // Description
 	private Boolean published = false;
-
+ 
 //	@OneToOne
 //	@JoinColumn(name = "feedback_fk")
 //	private Feedback feedback;

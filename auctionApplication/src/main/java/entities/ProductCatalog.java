@@ -58,6 +58,15 @@ public class ProductCatalog implements Serializable {
 		catalog.add(product);
 	}
 	
+	public void removeProduct(int id) {
+		if (catalog.get(id) != null)
+			catalog.remove(id);
+	}
+	
+	public Integer getSize() {
+		return catalog.size();
+	}
+	
 	public Product getProductFromCatalog(int id) {
 		Product product = null;
 		for (Product p : catalog) {

@@ -6,19 +6,20 @@ import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.jms.JMSConnectionFactory;
+import javax.jms.JMSContext;
+import javax.jms.JMSSessionMode;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-
-import org.eclipse.persistence.internal.oxm.schema.model.List;
 
 import entities.Account;
 import entities.Accounts;
@@ -79,6 +80,7 @@ public class AuctionDao {
 		int idInt = Integer.parseInt(id);
 		Bid bid = em.find(Bid.class, idInt);
 		return bid;
+
 	}
 
 }

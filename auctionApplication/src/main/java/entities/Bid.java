@@ -1,4 +1,6 @@
 package entities;
+import java.io.Serializable;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,30 +12,35 @@ import javax.xml.bind.annotation.XmlTransient;
 	@NamedQuery(name = "Bid.findAll", query = "SELECT b From Bid b")
 })
 @Table(name = "bid")
-public class Bid {
+public class Bid implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id; 
+	private int bidId; 
 	
 	private int bidAmount; 
 	
-	@OneToOne(cascade = CascadeType.PERSIST)
-//	@XmlTransient
+	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "bid")
+	@XmlTransient
 	private Product product;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
+	@XmlTransient
 	private Account account;
 	
-
-//	@OneToOne
-//	@XmlTransient 
-//	private Account account; 
+	public static final String FIND_ALL = "Bid.findAll";
 	
 	public Bid() {}
 	
+	public Bid(int bidAmount, Product product, Account account) {
+		this.bidAmount = bidAmount;
+		this.product = product;
+		this.account = account;
+	}
+	
 	public int getId() {
-		return id;
+		return bidId;
 	}
 	
 	public int getBidAmount() {

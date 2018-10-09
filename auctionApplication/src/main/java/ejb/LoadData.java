@@ -11,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import entities.Account;
+import entities.Bid;
+import entities.Product;
 import entities.ProductCatalog;
 /*
  * Så langt lager den bare brukere og persister de
@@ -29,15 +31,46 @@ public class LoadData {
 		assert(accounts.size()==numberOfAccounts);
 		
 		accounts.forEach(s->em.persist(s));
+	
 		em.flush();
 
 		
-//		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
-//		
-//		em.persist(acc1);
-//		
-//		em.flush();
-//		
+		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
+		ProductCatalog pc1 = new ProductCatalog("Phils Catalog", acc1);
+
+		Product p1 = new Product("Bok", "bok1.jpg", "Novelle");
+		Product p2 = new Product("Mobilen til Tony", "mobil.jpg", "Billig");
+		
+		Bid bid1 = new Bid();
+		Bid bid2 = new Bid();
+		
+		bid1.setBidAmount(500);
+		bid1.setAccount(acc1);		
+		
+		
+		Account acc2 = new Account("Joakim", "90909090", 0, "joakim@hvl.no");
+		ProductCatalog pc2 = new ProductCatalog("Joakims Catalog", acc2);
+
+		
+		Product p3 = new Product("PC", "PC.jpg", "private computer", bid1);
+		Product p4 = new Product("Datamus", "mus.jpg", "Trådløs");
+		
+		
+
+		pc1.addProduct(p1); 
+		pc1.addProduct(p2);
+		
+		pc2.addProduct(p3);
+		pc2.addProduct(p4);
+			
+		em.persist(acc1);
+		em.persist(p1);
+		em.persist(pc1);
+		em.persist(bid1);
+		em.persist(bid2);
+		
+		em.flush();
+		
 		
 	}
 	

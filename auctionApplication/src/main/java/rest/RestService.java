@@ -3,6 +3,7 @@ package rest;
 import java.net.URI;
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -38,7 +39,8 @@ public class RestService {
 	private UriInfo uriInfo;
 	@PersistenceContext(unitName = "auctionApplication")
 	EntityManager em;
-	//EntityManagerFactory emf = Persistence.createEntityManagerFactory("auctionApplication");
+	@EJB
+	AuctionDao dao = new AuctionDao();
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -59,33 +61,28 @@ public class RestService {
 	 *				REST services for Account				*
 	 *														*
 	 ********************************************************/
-	
-	@GET
-	@Path("/accounts")
-	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Accounts getAccounts() {
-		TypedQuery<Account> query = em.createNamedQuery(Account.FIND_ALL, Account.class);
-		Accounts accounts = new Accounts(query.getResultList());
-		return accounts;
-	}
-	
+		
 	@POST
 	@Path("/accounts")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response createAccount(Account account) {
 		if (account == null)
 			throw new BadRequestException();
-		em.persist(account);
-		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
-		return Response.created(accountUri).build();
+		return Response.created(dao.createAccount(account)).build();
+	}
+	
+	@GET
+	@Path("/accounts")
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response getAccounts() {
+		return Response.ok(dao.getAllAccounts()).build();
 	}
 	
 	@GET
 	@Path("/accounts/{id}")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response getAccoundId(@PathParam("id") String id) {
-		int idInt = Integer.parseInt(id);
-		Account account = em.find(Account.class, idInt);
+		Account account = dao.getAccount(id);
 		if (account == null)
 			throw new NotFoundException();
 		return Response.ok(account).build();
@@ -97,28 +94,26 @@ public class RestService {
 	 *														*
 	 ********************************************************/
 	
+	@POST
+	@Path("/products")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+	public Response createProduct(Product product) {
+		if (product == null)
+			throw new BadRequestException();
+		return Response.created(dao.createProduct(product)).build();
+	}
 
 	@GET
 	@Path("/products")
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Products getProducts() {
-		TypedQuery<Product> query = em.createNamedQuery(Product.FIND_ALL, Product.class);
-		Products products = new Products(query.getResultList());
-		return products;
-	}
-	
-	@POST
-	@Path("/products")
-	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response createProduct(Product product) {
-		return Response.created(AuctionDao.getAllProducts(product)).build();
+		return dao.getAllProducts();
 	}
 	
 	@GET
 	@Path("/products/{id}")
 	public Response getProduct(@PathParam("id") String id) {
-		int idInt = Integer.parseInt(id);
-		Product product = em.find(Product.class, idInt);
+		Product product = dao.getProduct(id);
 		if (product == null)
 			throw new NotFoundException();
 		return Response.ok(product).build();
@@ -136,32 +131,15 @@ public class RestService {
 	public Response createBid(Bid bid) {
 		if (bid == null)
 			throw new BadRequestException();
-		em.persist(bid);
-		URI bidUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getId())).build();
-		return Response.created(bidUri).build();
+		return Response.created(dao.createBid(bid)).build();
 	}
 	
 	@GET
 	@Path("/bids/{id}")
 	public Response getBid(@PathParam("id") String id) {
-		int idInt = Integer.parseInt(id);
-		Bid bid = em.find(Bid.class, idInt);
+		Bid bid = dao.getBid(id);
 		if (bid == null)
 			throw new NotFoundException();
 		return Response.ok(bid).build();
 	} 
-	
-//	/*TODO
-//	@POST
-//	@Consumes(MediaType.APPLICATION_XML)
-//	@Path("{id}/bids")
-//	public Response createBid(Bid bid) {
-//		if (bid == null)
-//			throw new BadRequestException();
-//		em.persist(bid);
-//		URI bidUri = uriInfo.getAbsolutePathBuilder().path(bid.getId).build();
-//		return Response.created(bidUri).build();
-//	}*/
-	
-
 }

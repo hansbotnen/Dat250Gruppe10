@@ -71,10 +71,7 @@ public class RestService {
 	 *				RESTservices for Account				*
 	 *														*
 	 ********************************************************/
-<<<<<<< HEAD
-		
-=======
-	
+
 	@GET
 	@Path("/accounts")
 	@Produces(MediaType.APPLICATION_XML)
@@ -93,8 +90,6 @@ public class RestService {
 		return accounts;
 	}
 	
-	
->>>>>>> origin/Philipv2
 	@POST
 	@Path("/accounts")
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -196,8 +191,6 @@ public class RestService {
 			throw new NotFoundException();
 		return Response.ok(bid).build();
 	} 
-<<<<<<< HEAD
-=======
 	
 	/********************************************************
 	 * 														*
@@ -236,5 +229,5 @@ public class RestService {
 //	}*/
 	
 
->>>>>>> origin/Philipv2
+
 }

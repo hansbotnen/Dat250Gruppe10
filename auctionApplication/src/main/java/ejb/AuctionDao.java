@@ -24,6 +24,7 @@ import javax.ws.rs.core.UriInfo;
 import entities.Account;
 import entities.Accounts;
 import entities.Bid;
+import entities.Bids;
 import entities.Product;
 import entities.Products;
 
@@ -80,7 +81,11 @@ public class AuctionDao {
 		int idInt = Integer.parseInt(id);
 		Bid bid = em.find(Bid.class, idInt);
 		return bid;
-
 	}
-
+	
+	public Bids getBids() {
+		TypedQuery<Bid> query = em.createNamedQuery(Bid.FIND_ALL, Bid.class);
+		Bids bids = new Bids(query.getResultList());
+		return bids;
+	}
 }

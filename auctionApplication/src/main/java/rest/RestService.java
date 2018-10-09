@@ -160,9 +160,7 @@ public class RestService {
 	@GET
 	@Path("/bids")
 	public Bids getBids() {
-		TypedQuery<Bid> query = em.createNamedQuery(Bid.FIND_ALL, Bid.class);
-		Bids bids = new Bids(query.getResultList());
-		return bids;
+		return dao.getBids();
 	}
 	
 	@GET

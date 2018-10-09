@@ -71,24 +71,6 @@ public class RestService {
 	 *				RESTservices for Account				*
 	 *														*
 	 ********************************************************/
-
-	@GET
-	@Path("/accounts")
-	@Produces(MediaType.APPLICATION_XML)
-	public Accounts getAccountsXML() {
-		TypedQuery<Account> query = em.createNamedQuery(Account.FIND_ALL, Account.class);
-		Accounts accounts = new Accounts(query.getResultList());
-		return accounts;
-	}
-	
-	@GET
-	@Path("/accounts/json")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Accounts getAccountsJSON() {
-		TypedQuery<Account> query = em.createNamedQuery(Account.FIND_ALL, Account.class);
-		Accounts accounts = new Accounts(query.getResultList());
-		return accounts;
-	}
 	
 	@POST
 	@Path("/accounts")

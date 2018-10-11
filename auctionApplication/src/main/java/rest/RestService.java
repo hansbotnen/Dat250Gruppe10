@@ -78,7 +78,7 @@ public class RestService {
 	public Response createAccount(Account account) {
 		if (account == null)
 			throw new BadRequestException();
-		return Response.created(dao.createAccount(account)).build();
+		return Response.created(dao.createAccountRest(account)).build();
 	}
 	
 	@GET
@@ -157,7 +157,7 @@ public class RestService {
 	public Response createBid(Bid bid) {
 		if (bid == null)
 			throw new BadRequestException();
-		return Response.created(dao.createBid(bid)).build();
+		return Response.created(dao.createBidRest(bid)).build();
 	}
 
 	@GET

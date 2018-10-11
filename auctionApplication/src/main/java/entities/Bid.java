@@ -21,7 +21,7 @@ public class Bid implements Serializable {
 	
 	private int bidAmount = 0; 
 	
-	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "bid")
+	@OneToOne(cascade = CascadeType.PERSIST)
 	@XmlTransient
 	private Product product;
 	
@@ -37,7 +37,7 @@ public class Bid implements Serializable {
 		this.bidAmount = bidAmount;
 		this.product = product;
 		this.account = account;
-		product.setBid(this);
+//		product.setBid(this);
 	}
 	
 	public int getId() {

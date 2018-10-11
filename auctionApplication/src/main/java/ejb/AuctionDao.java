@@ -37,7 +37,7 @@ public class AuctionDao {
 	@PersistenceContext(unitName="auctionApplication")
     private EntityManager em;
 	
-	public URI createAccount(Account account) {
+	public URI createAccountRest(Account account) {
 //		ProductCatalog productCatalog = new ProductCatalog(account);
 		em.persist(account);
 
@@ -45,6 +45,10 @@ public class AuctionDao {
 		
 		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
 		return accountUri;
+	}
+	
+	public void createAccountSoap(Account account) {
+		em.persist(account);
 	}
 	
 	public URI createProductCatalog(ProductCatalog catalog) {
@@ -84,6 +88,10 @@ public class AuctionDao {
 		return productUri;
 	}
 	
+	public void createProductSoap(Product product) {
+		em.persist(product);
+	}
+	
 	public Products getAllProducts() {
 		TypedQuery<Product> query = em.createNamedQuery(Product.FIND_ALL, Product.class);
 		Products products = new Products(query.getResultList());
@@ -96,10 +104,14 @@ public class AuctionDao {
 		return product;
 	}
 	
-	public URI createBid(Bid bid) {
+	public URI createBidRest(Bid bid) {
 		em.persist(bid);
 		URI bidUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getId())).build();
 		return bidUri;
+	}
+	
+	public void createBidSoap(Bid bid) {
+		em.persist(bid);
 	}
 	
 	public Bid getBid(String id) {

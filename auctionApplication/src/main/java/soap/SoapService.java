@@ -5,6 +5,7 @@ import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -38,11 +39,12 @@ public class SoapService {
 	 *				SOAPservices for Account				*
 	 *														*
 	 ********************************************************/
-	
-	public void createAccount(Account account) {
-		if (account == null)
+
+	public void createAccount(String name, String phone, float rating, String email) {
+		if (name == null)
 			throw new BadRequestException();
-		dao.createAccount(account);
+		Account account = new Account(name, phone, rating, email);
+		dao.createAccountSoap(account);
 	}
 	
 	public Accounts getAccounts() {
@@ -62,11 +64,16 @@ public class SoapService {
 	 *														*
 	 ********************************************************/
 	
-	public void createProduct(String id, Product product) {
-		if (product == null)
+	public void createProduct(String productName, String picture, String features, Boolean publish) {
+		if (productName == null)
 			throw new BadRequestException();
 		
-		dao.createProduct(id, product);
+		Product product = new Product();
+		product.setProductName(productName);
+		product.setPicture(picture);
+		product.setFeatures(features);
+		product.setPublish(publish);
+		dao.createProductSoap(product);
 	}
 
 	public Products getProducts() {
@@ -86,11 +93,16 @@ public class SoapService {
 	 *				SOAPservices for Bids	 				*
 	 *														*
 	 ********************************************************/
-
-	public void createBid(Bid bid) {
-		if (bid == null)
+	
+	@Transactional
+	public void createBid(int bidAmount, String accountId, String productId) {
+		if (bidAmount == 0)
 			throw new BadRequestException();
-		dao.createBid(bid);
+		Bid bid = new Bid();
+		bid.setBidAmount(bidAmount);
+		bid.setAccount(dao.getAccount(accountId));
+		bid.setProduct(dao.getProduct(productId));
+		dao.createBidSoap(bid);
 	}
 	
 	public Bid getBid(@PathParam("id") String id) {

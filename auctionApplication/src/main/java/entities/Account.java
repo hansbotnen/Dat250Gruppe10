@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -37,7 +38,9 @@ public class Account implements Serializable {
 //	@OneToMany(mappedBy = "account")
 //	private ArrayList<Feedback> feedbacks;
 	
-	@OneToOne
+	@OneToOne(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	private ProductCatalog catalog;
 
 	public static final String FIND_ALL = "Account.findAll";
@@ -47,9 +50,10 @@ public class Account implements Serializable {
 		this.phone = phone;
 		this.rating = rating;
 		this.email = email;
+		catalog=new ProductCatalog(this);
 	}
 
-	public Account() {
+	public Account() {catalog=new ProductCatalog(this);
 	}
 
 	public int getId() {
@@ -92,6 +96,7 @@ public class Account implements Serializable {
 		this.catalog = catalog;
 	}
 	
+	@XmlTransient
 	public ProductCatalog getProductCatalog() {
 		return catalog;
 	}

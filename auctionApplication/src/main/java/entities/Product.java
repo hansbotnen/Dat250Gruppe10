@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -104,7 +105,7 @@ public class Product implements Serializable {
 		this.catalog = catalog;
 	}
 	
-	
+	@XmlTransient
 	public ProductCatalog getProductCatalog() {
 		return catalog;
 	}

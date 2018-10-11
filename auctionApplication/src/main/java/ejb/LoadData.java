@@ -35,7 +35,7 @@ public class LoadData {
 		accounts.get(0).getProductCatalog().addProduct(p2);
 		Bid bid1 = new Bid(500, p1, accounts.get(1));
 		
-		em.persist(bid1);
+		
 		accounts.forEach(s->em.persist(s));
 	
 		em.flush();

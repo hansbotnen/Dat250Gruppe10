@@ -38,11 +38,8 @@ public class AuctionDao {
     private EntityManager em;
 	
 	public URI createAccountRest(Account account) {
-//		ProductCatalog productCatalog = new ProductCatalog(account);
-		em.persist(account);
-
-//		createProductCatalog(productCatalog);
-		
+		account.getProductCatalog().setCatalogName(account.getName()+"'s Catalog");
+		em.persist(account);		
 		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
 		return accountUri;
 	}

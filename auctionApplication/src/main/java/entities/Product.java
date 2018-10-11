@@ -31,7 +31,8 @@ public class Product implements Serializable {
 	@ManyToOne
 	private ProductCatalog catalog;
 
-	@OneToOne(cascade = CascadeType.PERSIST)
+	@OneToOne(cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	private Bid bid;
 
 	public static final String FIND_ALL = "Product.findAll";

@@ -19,7 +19,7 @@ public class Bid implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int bidId; 
 	
-	private int bidAmount; 
+	private int bidAmount = 0; 
 	
 	@OneToOne(cascade = CascadeType.PERSIST, mappedBy = "bid")
 	@XmlTransient
@@ -37,6 +37,7 @@ public class Bid implements Serializable {
 		this.bidAmount = bidAmount;
 		this.product = product;
 		this.account = account;
+		product.setBid(this);
 	}
 	
 	public int getId() {
@@ -48,7 +49,10 @@ public class Bid implements Serializable {
 	}
 	
 	public void setBidAmount(int bidAmount) {
-		this.bidAmount = bidAmount;
+		if (this.bidAmount < bidAmount)
+			this.bidAmount = bidAmount;
+		else 
+			throw new IllegalArgumentException("Cannot bid lower");
 	}
 	
 	public void setProduct(Product product) {

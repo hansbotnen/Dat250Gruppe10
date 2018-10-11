@@ -36,6 +36,9 @@ public class Account implements Serializable {
 //	@JoinColumn(name = "feedback")
 //	@OneToMany(mappedBy = "account")
 //	private ArrayList<Feedback> feedbacks;
+	
+	@OneToOne
+	private ProductCatalog catalog;
 
 	public static final String FIND_ALL = "Account.findAll";
 
@@ -44,7 +47,6 @@ public class Account implements Serializable {
 		this.phone = phone;
 		this.rating = rating;
 		this.email = email;
-
 	}
 
 	public Account() {
@@ -85,14 +87,14 @@ public class Account implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	/*
-	 * public String getAddress() { return address; }
-	 * 
-	 * public void setAddress(String address) { this.address = address; }
-	 * 
-	 * public String getCity() { return city; }
-	 */
+	
+	public void setProductCatalog(ProductCatalog catalog) {
+		this.catalog = catalog;
+	}
+	
+	public ProductCatalog getProductCatalog() {
+		return catalog;
+	}
 
 //	public void addFeedback(Feedback feedback) {
 //		feedbacks.add(feedback);
@@ -109,18 +111,5 @@ public class Account implements Serializable {
 //		this.feedbacks = feedbacks;
 //		feedbacks.forEach(f -> f.setAccount(this));
 //	}
-
-	// If table Address is not used
-	// public void setCity(String city) {
-	// this.city = city;
-	// }
-	//
-	// public String getZipcode() {
-	// return zipcode;
-	// }
-	//
-	// public void setZipcode(String zipcode) {
-	// this.zipcode = zipcode;
-	// }
 
 }

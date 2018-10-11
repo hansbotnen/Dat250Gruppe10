@@ -26,6 +26,8 @@ import entities.Accounts;
 import entities.Bid;
 import entities.Bids;
 import entities.Product;
+import entities.ProductCatalog;
+import entities.ProductCatalogs;
 import entities.Products;
 
 @Stateless
@@ -36,9 +38,25 @@ public class AuctionDao {
     private EntityManager em;
 	
 	public URI createAccount(Account account) {
+//		ProductCatalog productCatalog = new ProductCatalog(account);
 		em.persist(account);
+
+//		createProductCatalog(productCatalog);
+		
 		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
 		return accountUri;
+	}
+	
+	public URI createProductCatalog(ProductCatalog catalog) {
+		em.persist(catalog);
+		URI pcURI = uriInfo.getAbsolutePathBuilder().path(Integer.toString(catalog.getId())).build();
+		return pcURI;
+	}
+	
+	public ProductCatalogs getAllProductCatalogs() {
+		TypedQuery<ProductCatalog> query = em.createNamedQuery(ProductCatalog.FIND_ALL, ProductCatalog.class);
+		ProductCatalogs pc = new ProductCatalogs(query.getResultList());
+		return pc;
 	}
 	
 	public Accounts getAllAccounts() {
@@ -53,7 +71,14 @@ public class AuctionDao {
 		return account;
 	}
 	
-	public URI createProduct(Product product) {
+	public URI createProduct(String id, Product product) {
+		//Add product straight into an accounts product catalog
+		Account account = getAccount(id);
+		ProductCatalog catalog = account.getProductCatalog();
+		catalog.addProduct(product);
+//		product.setProductCatalog(catalog);
+		
+		em.persist(catalog);
 		em.persist(product);
 		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getId())).build();
 		return productUri;
@@ -88,4 +113,6 @@ public class AuctionDao {
 		Bids bids = new Bids(query.getResultList());
 		return bids;
 	}
+	
+	
 }

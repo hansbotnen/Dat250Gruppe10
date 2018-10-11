@@ -105,12 +105,15 @@ public class RestService {
 	 ********************************************************/
 	
 	@POST
-	@Path("/products")
+//	@Path("/products") Before
+	@Path("/accounts/{id}/productcatalog") //After
 	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response createProduct(Product product) {
+	public Response createProduct(@PathParam("id") String id, Product product) {
+	
 		if (product == null)
 			throw new BadRequestException();
-		return Response.created(dao.createProduct(product)).build();
+
+		return Response.created(dao.createProduct(id, product)).build();
 	}
 
 	@GET
@@ -179,21 +182,25 @@ public class RestService {
 	 ********************************************************/
 	
 	@GET
-	@Path("/accounts/productcatalog")
-	public ProductCatalogs getProductCatalog() {
-		TypedQuery<ProductCatalog> query = em.createQuery("SELECT b FROM ProductCatalog b", ProductCatalog.class);
-		ProductCatalogs pc = new ProductCatalogs(query.getResultList());
-		return pc;
+	@Path("/productcatalog")
+	public ProductCatalogs getAllProductCatalog() {
+		return dao.getAllProductCatalogs();
 	} 
-
+	
 	@GET
-	@Path("/accounts/lol/productcatalog")
-	public Products getProductFromCatalog() {
-		
-		TypedQuery<Product> query = em.createQuery("SELECT b FROM ProductCatalog_Product b", Product.class);
-		Products pc = new Products(query.getResultList());
-		return pc;
-	} 
+	@Path("/accounts/{id}/productcatalog") //After
+	public Response getProductCatalog(@PathParam("id") String id) {
+		Account account = dao.getAccount(id);
+		ProductCatalog pc = account.getProductCatalog();
+		if (pc == null)
+			throw new NotFoundException();
+		return Response.ok(pc).build();
+	}
+	
+	
+//	@POST
+//	@Path("/bids/{id}/{amount}")
+//	public Response bidProduct
 
 	
 //	/*TODO

@@ -9,9 +9,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
+@NamedQueries({ @NamedQuery(name = "ProductCatalog.findAll", query = "SELECT b From ProductCatalog b") })
+@Table(name = "productcatalog")
 public class ProductCatalog implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String FIND_ALL = "ProductCatalog.findAll";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,13 +29,20 @@ public class ProductCatalog implements Serializable {
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
-	private ArrayList<Product> catalog = new ArrayList<Product>();
+	private ArrayList<Product> productList = new ArrayList<Product>();
 	
 	public ProductCatalog() {}
 	
 	public ProductCatalog(String catalogName, Account account) {
 		this.catalogName = catalogName;
 		this.account = account;
+		account.setProductCatalog(this);
+	}
+	
+	public ProductCatalog(Account account) {
+		this.catalogName = account.getName() + "'s Catalog";
+		this.account = account;
+		account.setProductCatalog(this);
 	}
 	
 	public int getId() {
@@ -55,21 +66,21 @@ public class ProductCatalog implements Serializable {
 	}
 	
 	public void addProduct(Product product) {
-		catalog.add(product);
+		productList.add(product);
 	}
 	
 	public void removeProduct(int id) {
-		if (catalog.get(id) != null)
-			catalog.remove(id);
+		if (productList.get(id) != null)
+			productList.remove(id);
 	}
 	
 	public Integer getSize() {
-		return catalog.size();
+		return productList.size();
 	}
 	
 	public Product getProductFromCatalog(int id) {
 		Product product = null;
-		for (Product p : catalog) {
+		for (Product p : productList) {
 			if (p.getId() == id) 
 				product = p;
 			else 

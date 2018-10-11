@@ -24,12 +24,11 @@ public class Product implements Serializable {
 	private String features; // Description
 	private Boolean published = false;
  
-//	@OneToOne
-//	@JoinColumn(name = "feedback_fk")
-//	private Feedback feedback;
-
 //	@Temporal(TemporalType.TIMESTAMP)
 //	private Date endTime; // java.util.Date || java.util.Calendar
+	
+	@ManyToOne
+	private ProductCatalog catalog;
 
 	@OneToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "bid_fk")
@@ -43,13 +42,17 @@ public class Product implements Serializable {
 		this.productName = productName;
 		this.picture = picture;
 		this.features = features; 
+		//catalog.addProduct(this);
 	}
 	
-	public Product(String productName, String picture, String features, Bid bid) {
+	public Product(String productName, String picture, String features, Bid bid, ProductCatalog catalog) {
 		this.productName = productName;
 		this.picture = picture;
 		this.features = features; 
 		this.bid = bid;
+		this.catalog = catalog;
+		bid.setProduct(this);
+		catalog.addProduct(this);
 	}
 	
 	public int getId() {
@@ -96,13 +99,14 @@ public class Product implements Serializable {
 	public void setBid(Bid bid) { 
 		this.bid = bid;
 	}
-
-//	public void setFeedback(Feedback feedback) {
-//		this.feedback = feedback;
-//	}
-//
-//	public Feedback getFeedback() {
-//		return feedback;
-//	}
+	
+	public void setProductCatalog(ProductCatalog catalog) {
+		this.catalog = catalog;
+	}
+	
+	
+	public ProductCatalog getProductCatalog() {
+		return catalog;
+	}
 
 }

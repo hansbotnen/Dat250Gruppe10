@@ -62,10 +62,11 @@ public class SoapService {
 	 *														*
 	 ********************************************************/
 	
-	public void createProduct(Product product) {
+	public void createProduct(String id, Product product) {
 		if (product == null)
 			throw new BadRequestException();
-		dao.createProduct(product);
+		
+		dao.createProduct(id, product);
 	}
 
 	public Products getProducts() {

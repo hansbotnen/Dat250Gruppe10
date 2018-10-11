@@ -29,7 +29,13 @@ public class LoadData {
 		int numberOfAccounts = 10;
 		ArrayList<Account> accounts = generateAccounts(numberOfAccounts);
 		assert(accounts.size()==numberOfAccounts);
+		Product p1 = new Product("Bok", "bok1.jpg", "Novelle");
+		Product p2 = new Product("Bangkok dangerous", "film1.jpg", "Nick Cage film");
+		accounts.get(0).getProductCatalog().addProduct(p1);
+		accounts.get(0).getProductCatalog().addProduct(p2);
+		Bid bid1 = new Bid(500, p1, accounts.get(1));
 		
+		em.persist(bid1);
 		accounts.forEach(s->em.persist(s));
 	
 		em.flush();

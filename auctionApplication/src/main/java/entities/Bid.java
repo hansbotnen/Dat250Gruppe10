@@ -21,12 +21,11 @@ public class Bid implements Serializable {
 	
 	private int bidAmount = 0; 
 	
+
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@XmlTransient
 	private Product product;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
-	@XmlTransient
 	private Account account;
 	
 	public static final String FIND_ALL = "Bid.findAll";
@@ -37,7 +36,7 @@ public class Bid implements Serializable {
 		this.bidAmount = bidAmount;
 		this.product = product;
 		this.account = account;
-//		product.setBid(this);
+		product.setBid(this);
 	}
 	
 	public int getId() {
@@ -59,6 +58,7 @@ public class Bid implements Serializable {
 		this.product = product;
 	}
 	
+	@XmlTransient
 	public Product getProduct() {
 		return product;
 	}
@@ -66,7 +66,8 @@ public class Bid implements Serializable {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	
+
+	@XmlTransient
 	public Account getAccount() {
 		return account;
 	}

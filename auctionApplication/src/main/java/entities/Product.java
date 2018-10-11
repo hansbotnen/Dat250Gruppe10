@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -30,9 +31,8 @@ public class Product implements Serializable {
 	@ManyToOne
 	private ProductCatalog catalog;
 
-//	@OneToOne(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "bid_fk")
-//	private Bid bid;
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Bid bid;
 
 	public static final String FIND_ALL = "Product.findAll";
 
@@ -49,7 +49,7 @@ public class Product implements Serializable {
 		this.productName = productName;
 		this.picture = picture;
 		this.features = features; 
-//		this.bid = bid;
+		this.bid = bid;
 		this.catalog = catalog;
 		bid.setProduct(this);
 		catalog.addProduct(this);
@@ -92,13 +92,13 @@ public class Product implements Serializable {
 		this.published = publish;
 	}
 	
-//	public Bid getBid() {
-//		return bid;
-//	}
-//	
-//	public void setBid(Bid bid) { 
-//		this.bid = bid;
-//	}
+	public Bid getBid() {
+		return bid;
+	}
+	
+	public void setBid(Bid bid) { 
+		this.bid = bid;
+	}
 	
 	public void setProductCatalog(ProductCatalog catalog) {
 		this.catalog = catalog;

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -23,26 +24,27 @@ public class ProductCatalog implements Serializable {
 
 	private String catalogName;
 	
-	@OneToOne
+	@OneToOne(
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
 	private Account account; 
 	
 	@OneToMany(
 			cascade = CascadeType.ALL,
 			orphanRemoval = true)
-	private ArrayList<Product> productList = new ArrayList<Product>();
+	private ArrayList<Product> productList;
 	
-	public ProductCatalog() {}
+	public ProductCatalog() {productList = new ArrayList<Product>();}
 	
 	public ProductCatalog(String catalogName, Account account) {
 		this.catalogName = catalogName;
 		this.account = account;
-		account.setProductCatalog(this);
 	}
 	
 	public ProductCatalog(Account account) {
 		this.catalogName = account.getName() + "'s Catalog";
 		this.account = account;
-		account.setProductCatalog(this);
+		productList = new ArrayList<Product>();
 	}
 	
 	public int getId() {
@@ -60,7 +62,8 @@ public class ProductCatalog implements Serializable {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	
+
+	@XmlTransient
 	public Account getAccount() {
 		return account;
 	}
@@ -78,16 +81,20 @@ public class ProductCatalog implements Serializable {
 		return productList.size();
 	}
 	
+	public void setProductList(ArrayList<Product> list) {
+		this.productList = list;
+	}
+	
+	public ArrayList<Product> getProductList(){
+		return productList;
+	}
+	
 	public Product getProductFromCatalog(int id) {
-		Product product = null;
-		for (Product p : productList) {
-			if (p.getId() == id) 
-				product = p;
-			else 
-				throw new NullPointerException();
+		for(Product p:productList) {
+			if(p.getId()==id)
+				return p;
 		}
-		
-		return product;
+		return null;
 	}
 	
 	

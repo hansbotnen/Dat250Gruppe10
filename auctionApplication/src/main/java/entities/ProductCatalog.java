@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
@@ -61,7 +62,8 @@ public class ProductCatalog implements Serializable {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	
+
+	@XmlTransient
 	public Account getAccount() {
 		return account;
 	}
@@ -77,6 +79,14 @@ public class ProductCatalog implements Serializable {
 	
 	public Integer getSize() {
 		return productList.size();
+	}
+	
+	public void setProductList(ArrayList<Product> list) {
+		this.productList = list;
+	}
+	
+	public ArrayList<Product> getProductList(){
+		return productList;
 	}
 	
 	public Product getProductFromCatalog(int id) {

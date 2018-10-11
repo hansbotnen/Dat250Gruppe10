@@ -96,7 +96,7 @@ public class Account implements Serializable {
 		this.catalog = catalog;
 	}
 	
-	@XmlTransient
+	
 	public ProductCatalog getProductCatalog() {
 		return catalog;
 	}

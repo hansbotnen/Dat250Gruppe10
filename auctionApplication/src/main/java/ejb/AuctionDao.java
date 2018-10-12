@@ -108,6 +108,7 @@ public class AuctionDao {
 	}
 	
 	public void createBidSoap(Bid bid) {
+		bid.getProduct().setBid(bid);
 		em.persist(bid);
 	}
 	

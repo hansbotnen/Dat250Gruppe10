@@ -12,9 +12,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -174,6 +176,25 @@ public class RestService {
 			throw new NotFoundException();
 		return Response.ok(bid).build();
 	} 
+	
+	@PUT
+	@Path("/account/{aid}/product/{pid}/bid")
+	@Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
+	public Response placeBid(@PathParam("aid") String aid, @PathParam("pid") String pid, @FormParam("bidId") String bidId, @FormParam("bidAmount") String bidAmount) {
+		Account account = dao.getAccount(aid);
+		Product product = dao.getProduct(pid);
+		int amount = Integer.parseInt(bidAmount);
+		Bid bid = dao.getBid(bidId);
+
+		if (product != null && account != null && bid != null) {
+			bid.setAccount(account);
+			bid.setProduct(product);
+			bid.setBidAmount(amount);
+		}
+		
+		return Response.ok(bid).build();
+	}
 
 	
 	/********************************************************

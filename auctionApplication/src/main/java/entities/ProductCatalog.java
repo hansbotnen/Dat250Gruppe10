@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -20,6 +21,7 @@ public class ProductCatalog implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlElement(required = true)
 	private int catalogId;
 
 	private String catalogName;

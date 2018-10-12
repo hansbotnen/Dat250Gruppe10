@@ -174,6 +174,7 @@ public class RestService {
 			throw new NotFoundException();
 		return Response.ok(bid).build();
 	} 
+
 	
 	/********************************************************
 	 * 														*
@@ -215,6 +216,6 @@ public class RestService {
 //		return Response.created(bidUri).build();
 //	}*/
 	
-
+	
 
 }

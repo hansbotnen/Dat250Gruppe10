@@ -3,6 +3,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -17,6 +18,7 @@ public class Bid implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@XmlElement(required = true)
 	private int bidId; 
 	
 	private int bidAmount = 0; 

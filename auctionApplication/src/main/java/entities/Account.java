@@ -58,7 +58,7 @@ public class Account implements Serializable {
 	public Account() {catalog=new ProductCatalog(this);
 	}
 
-	public int getId() {
+	public int getAccountId() {
 		return accountId;
 	}
 

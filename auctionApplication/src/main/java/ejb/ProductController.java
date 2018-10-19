@@ -9,31 +9,23 @@ import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import entities.Accounts;
 import entities.Product;
 import entities.Products;
 
-@ManagedBean(value = "auctionController")
-@SessionScoped
-public class AuctionController {
+@Named(value = "productController")
+@RequestScoped
+public class ProductController {
 
 	@EJB
 	private AuctionDao auctionDao;
 	
 	private Product product; 
 	
-	public Products getProducts() {
-		/*
-		Products p = auctionDao.getAllProducts();
-		System.out.println(p.size());
-		*/
-		
-		Product p = new Product();
-		p.setProductName("Test");
-		Products ps = new Products();
-		ps.add(p);
-		return ps;
+	public Products getProducts() {	
+		return auctionDao.getAllProducts();
 	}
-	
+
 	public Product getProduct() {
 		if (this.product == null) {
 			product = new Product();

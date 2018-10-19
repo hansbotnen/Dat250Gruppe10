@@ -34,7 +34,9 @@ public class LoadData {
 		accounts.get(0).getProductCatalog().addProduct(p1);
 		accounts.get(0).getProductCatalog().addProduct(p2);
 		Bid bid1 = new Bid(500, p1, accounts.get(1));
-		
+		Bid bid2 = new Bid();
+		bid2.setBidAmount(1000);
+		p2.setBid(bid2);
 		
 		accounts.forEach(s->em.persist(s));
 	

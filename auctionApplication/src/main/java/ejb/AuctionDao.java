@@ -40,7 +40,7 @@ public class AuctionDao {
 	public URI createAccountRest(Account account) {
 		account.getProductCatalog().setCatalogName(account.getName()+"'s Catalog");
 		em.persist(account);		
-		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
+		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getAccountId())).build();
 		return accountUri;
 	}
 	
@@ -50,7 +50,7 @@ public class AuctionDao {
 	
 	public URI createProductCatalog(ProductCatalog catalog) {
 		em.persist(catalog);
-		URI pcURI = uriInfo.getAbsolutePathBuilder().path(Integer.toString(catalog.getId())).build();
+		URI pcURI = uriInfo.getAbsolutePathBuilder().path(Integer.toString(catalog.getCatalogId())).build();
 		return pcURI;
 	}
 	
@@ -81,7 +81,7 @@ public class AuctionDao {
 		
 		em.persist(catalog);
 		em.persist(product);
-		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getId())).build();
+		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getProductId())).build();
 		return productUri;
 	}
 	
@@ -103,7 +103,7 @@ public class AuctionDao {
 	
 	public URI createBidRest(Bid bid) {
 		em.persist(bid);
-		URI bidUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getId())).build();
+		URI bidUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(bid.getBidId())).build();
 		return bidUri;
 	}
 	

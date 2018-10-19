@@ -49,7 +49,7 @@ public class ProductCatalog implements Serializable {
 		productList = new ArrayList<Product>();
 	}
 	
-	public int getId() {
+	public int getCatalogId() {
 		return catalogId;
 	}
 	
@@ -93,7 +93,7 @@ public class ProductCatalog implements Serializable {
 	
 	public Product getProductFromCatalog(int id) {
 		for(Product p:productList) {
-			if(p.getId()==id)
+			if(p.getProductId()==id)
 				return p;
 		}
 		return null;

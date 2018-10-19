@@ -1,0 +1,6 @@
+.div-container-products{
+	border-style: solid;
+	height:80%;
+	overflow-y: auto;
+	margin-bottom: 10px;
+}

@@ -64,13 +64,13 @@ public class SoapService {
 	 *														*
 	 ********************************************************/
 	
-	public void createProduct(String productName, String picture, String features, Boolean publish) {
+	public void createProduct(String productName, String image, String features, Boolean publish) {
 		if (productName == null)
 			throw new BadRequestException();
 		
 		Product product = new Product();
 		product.setProductName(productName);
-		product.setPicture(picture);
+		product.setImage(image);
 		product.setFeatures(features);
 		product.setPublish(publish);
 		dao.createProductSoap(product);

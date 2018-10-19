@@ -41,7 +41,7 @@ public class Bid implements Serializable {
 		product.setBid(this);
 	}
 	
-	public int getId() {
+	public int getBidId() {
 		return bidId;
 	}
 	

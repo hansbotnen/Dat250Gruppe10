@@ -35,6 +35,10 @@ public class Feedback {
 
 	  public Feedback() {}
 	  
+	  public int getFeedbackId() {
+		  return feedbackId;
+	  }
+	  
 	  public String getFeedback() {
 	    return feedback;
 	  }

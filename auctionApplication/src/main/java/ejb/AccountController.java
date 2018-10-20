@@ -8,6 +8,8 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 
 import entities.Account;
 import entities.Accounts;
@@ -24,6 +26,11 @@ public class AccountController {
 	public Accounts getAccounts() {	
 		return auctionDao.getAllAccounts();
 	}
+	
+	public void createAccount() throws NamingException, JMSException {
+		this.auctionDao.createAccountSoap(account);
+	}
+	
 
 	public Account getAccount() {
 		if (this.account== null) {

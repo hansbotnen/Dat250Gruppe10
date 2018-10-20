@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      
+<h:head>
+    <link rel="stylesheet" type="text/css" href="css/style.css"></link>
+	<title>Auction Application</title>
+</h:head>
+<!-- Also add this product to the users catalog
+				 Next time: get user's id and its catalog, add product to catalog 
+			-->
+<h:body>
+	<h:form> 
+		<h:link value="JUNGLE" outcome="index"/><br/> 
+		
+		<h:link value="products" outcome="productlist"/><br/> 
+	</h:form>
+	<hr />
+	<h:form>
+	
+		<h3>Create Account</h3>
+		<h:panelGrid columns="2">
+	
+			<h:outputLabel for="name">Name:</h:outputLabel>
+	        <h:inputText id="name" value="#{accountController.account.name}" required="true"></h:inputText>
+
+	        <h:outputLabel for="password">Password:</h:outputLabel>
+			<h:inputText id="password" value="#{accountController.account.password}" required="true"></h:inputText>  	
+
+	        <h:outputLabel for="phone">Phone number:</h:outputLabel>
+			<h:inputText id="phone" value="#{accountController.account.phone}" required="true"></h:inputText>  	
+
+	        <h:outputLabel for="email">E-Mail:</h:outputLabel>
+			<h:inputText id="email" value="#{accountController.account.email}" required="true"></h:inputText>  	
+
+			<h:commandButton action="#{accountController.createAccount()}" value="Register"/>
+		</h:panelGrid>
+	</h:form>
+
+</h:body>
+</html>

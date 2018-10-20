@@ -35,6 +35,8 @@ public class Account implements Serializable {
 
 	@Column(name = "email")
 	private String email;
+	
+	private String password;
 
 //	@JoinColumn(name = "feedback")
 //	@OneToMany(mappedBy = "account")
@@ -92,6 +94,13 @@ public class Account implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 	public void setProductCatalog(ProductCatalog catalog) {

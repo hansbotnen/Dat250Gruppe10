@@ -16,7 +16,7 @@
 		<h:link value="User" outcome="userinformation"/>
 	</h:form>
 	<hr />
-	<h3>ProductList</h3>
+	<h3>Product</h3>
 	<div>
 		<h:form>
 			<ui:repeat value="#{productController.getProducts()}" var="pr">	
@@ -25,12 +25,7 @@
 		       		<h:outputLabel value="Product Name: "/><h:outputText value="#{pr.productName}" /><br/>
 		       		<h:outputLabel value="Description: "/><h:outputText value="#{pr.features}" /><br/>
 		       		<h:outputLabel value="Image: "/><h:outputText value="#{pr.image}" /><br/>  
-		       		<h:outputLabel value="BidAmount: "/><h:outputText value="#{pr.bid.bidAmount}"/> <br/>   
-		       		<a href="product.xhtml?productId=${product.productId}" /> <a/> 
-		       		<h:link value="More" outcome="product.xhtml?productId=${product.productId}"/>
-		       		<h:outputLink value="product.xhtml">
-		       			<f:param name="productId" value="#{pr.productId}" />
-		       		</h:outputLink>			
+		       		<h:outputLabel value="BidAmount: "/><h:outputText value="#{pr.bid.bidAmount}"/> <br/>   		
 		       		<br/>
 	       		</div>
 			</ui:repeat>

@@ -12,12 +12,12 @@
 
 <h:body>
 	<h:form> 
-		<h:link value="JUNGLE" outcome="index"/>
+		<h:link value="JUNGLE" outcome="index"/><br/> 
 		
-		<h:link value="products" outcome="productlist"/>
+		<h:link value="products" outcome="productlist"/><br/> 
 	</h:form>
 	<hr />
-	<h3>Users</h3>
+	<h3>Accounts</h3>
 	<div>
 		<h:form>
 			<ui:repeat value="#{accountController.getAccounts()}" var="a">	

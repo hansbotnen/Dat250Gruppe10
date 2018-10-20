@@ -107,9 +107,17 @@ public class AuctionDao {
 		return bidUri;
 	}
 	
+	//???????????
 	public void createBidSoap(Bid bid) {
 		bid.getProduct().setBid(bid);
 		em.persist(bid);
+	}
+	
+	public void createBidonProduct(Bid bid, Product product) {
+		bid.setProduct(product);
+		product.setBid(bid);
+		em.persist(bid);
+		em.persist(product);
 	}
 	
 	public Bid getBid(String id) {

@@ -13,8 +13,10 @@
 <h:body>
 	<h:form> 
 		<h:link value="JUNGLE" outcome="index"/>
+		<h:link value="User" outcome="userinformation"/>
 	</h:form>
 	<hr />
+	<h3>ProductList</h3>
 	<div>
 		<h:form>
 			<ui:repeat value="#{productController.getProducts()}" var="pr">	

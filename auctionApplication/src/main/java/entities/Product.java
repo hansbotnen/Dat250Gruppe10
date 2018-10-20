@@ -27,8 +27,8 @@ public class Product implements Serializable {
 	private String features; // Description
 	private Boolean published = false;
  
-//	@Temporal(TemporalType.TIMESTAMP)
-//	private Date endTime; // java.util.Date || java.util.Calendar
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date endTime; // java.util.Date || java.util.Calendar
 	
 	@ManyToOne
 	private ProductCatalog catalog;
@@ -93,6 +93,14 @@ public class Product implements Serializable {
 
 	public void setPublish(Boolean publish) {
 		this.published = publish;
+	}
+	
+	public Date getEndTime() {
+		return endTime;
+	}
+	
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 	
 	public Bid getBid() {

@@ -26,11 +26,14 @@
 		       		<h:outputLabel value="Description: "/><h:outputText value="#{pr.features}" /><br/>
 		       		<h:outputLabel value="Image: "/><h:outputText value="#{pr.image}" /><br/>  
 		       		<h:outputLabel value="BidAmount: "/><h:outputText value="#{pr.bid.bidAmount}"/> <br/>   
-		       		<a href="product.xhtml?productId=${product.productId}" /> <a/> 
-		       		<h:link value="More" outcome="product.xhtml?productId=${product.productId}"/>
-		       		<h:outputLink value="product.xhtml">
-		       			<f:param name="productId" value="#{pr.productId}" />
-		       		</h:outputLink>			
+		       		<h:link value="#{pr.productId}" outcome="product.xhtml/productId=${product.productId}"/> 
+		       		<!-- Fix this: Pass parameter to URL 
+		       		<h:commandLink title="Go to product">
+			       		<h:outputLink value="product.xhtml">
+			       			<f:param name="productId" value="#{pr.productId}" />
+			       		</h:outputLink>	
+		       		</h:commandLink>
+		       		-->		
 		       		<br/>
 	       		</div>
 			</ui:repeat>

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "Account.findAll", query = "SELECT b From Account b") })
+@NamedQueries({ @NamedQuery(name = "Account.findAll", query = "SELECT b From Account b")})
 @Table(name = "account")
 public class Account implements Serializable {
 
@@ -35,6 +35,9 @@ public class Account implements Serializable {
 
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "password")
+	private String password;
 
 //	@JoinColumn(name = "feedback")
 //	@OneToMany(mappedBy = "account")
@@ -46,7 +49,7 @@ public class Account implements Serializable {
 	private ProductCatalog catalog;
 
 	public static final String FIND_ALL = "Account.findAll";
-
+	
 	public Account(String name, String phone, float rating, String email) {
 		this.name = name;
 		this.phone = phone;
@@ -58,7 +61,7 @@ public class Account implements Serializable {
 	public Account() {catalog=new ProductCatalog(this);
 	}
 
-	public int getId() {
+	public int getAccountId() {
 		return accountId;
 	}
 
@@ -92,6 +95,14 @@ public class Account implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String email) {
+		this.password = password;
 	}
 	
 	public void setProductCatalog(ProductCatalog catalog) {

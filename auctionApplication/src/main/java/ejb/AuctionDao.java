@@ -40,7 +40,7 @@ public class AuctionDao {
 	public URI createAccountRest(Account account) {
 		account.getProductCatalog().setCatalogName(account.getName()+"'s Catalog");
 		em.persist(account);		
-		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getId())).build();
+		URI accountUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(account.getAccountId())).build();
 		return accountUri;
 	}
 	

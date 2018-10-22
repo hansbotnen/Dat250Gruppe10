@@ -89,22 +89,16 @@
 	</dependency>
 	-->
 	
-	<!-- https://mvnrepository.com/artifact/javax/javaee-api 
+	<!-- https://mvnrepository.com/artifact/javax/javaee-api -->
 	<dependency>
 	    <groupId>javax</groupId>
 	    <artifactId>javaee-api</artifactId>
 	    <version>8.0</version>
 	    <scope>provided</scope>
 	</dependency>
-	-->
 	
-	<dependency>
-	    <groupId>javax</groupId>
-	    <artifactId>javaee-web-api</artifactId>
-	    <version>7.0</version>
-	    <scope>provided</scope>
-	    <type>jar</type>
-	</dependency>
+	
+	
 	
 	
 	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-jaxb-annotations -->

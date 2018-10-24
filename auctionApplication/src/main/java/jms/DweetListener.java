@@ -11,8 +11,7 @@ import com.google.gson.JsonObject;
 import entities.Product;
 
 @MessageDriven(mappedName = "jms/dat250/Topic", activationConfig = {
-		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge"),
-		@ActivationConfigProperty(propertyName = "messageSelector", propertyValue = "topicUser = 'dweet'") })
+		@ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")})
 public class DweetListener implements MessageListener{
 	@Override
 	public void onMessage(Message message) {

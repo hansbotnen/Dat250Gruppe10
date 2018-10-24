@@ -16,16 +16,16 @@ import com.google.gson.JsonParser;
 
 public class DweetConnection {
 	
-	private String URL = "http://dweet.io/dweet/for";
+	private String URL = "http://dweet.io/dweet/for/";
 	private JsonParser jsonParser = new JsonParser();
-	private String userName = "auctionApplication";
+	private String thing = "auctionApplication";
 	
 	public DweetConnection() {
 	}
 	
 	public boolean publish(JsonElement content) {
 		try {
-			URL url = new URL(URL + userName);
+			URL url = new URL(URL + thing);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
 			connection.setRequestMethod("POST");

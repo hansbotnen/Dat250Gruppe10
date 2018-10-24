@@ -5,8 +5,11 @@ import java.util.Collections;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -23,6 +26,8 @@ public class LoadData {
 	
 	@PersistenceContext(unitName = "auctionApplication")
 	private EntityManager em;
+	@EJB
+	AuctionDao dao = new AuctionDao();
 	
 	@PostConstruct
 	public void createData() {
@@ -39,6 +44,15 @@ public class LoadData {
 		accounts.forEach(s->em.persist(s));
 	
 		em.flush();
+		try {
+			dao.testDweet(p1);
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		
 //		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");

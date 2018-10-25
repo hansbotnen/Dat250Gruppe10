@@ -63,7 +63,10 @@ public class AuctionController {
 	@Timeout
 	public void timeout(Timer timer) throws NamingException, JMSException {
 		int productId = (int) timer.getInfo();
-		Product product = auctionDao.getProduct(""+productId);	
+		Product product = auctionDao.getProduct(""+productId);
+		product.setCompleted(true);
+		product.setPublished(false);		
+		
 		if(product.getBid()!=null)
 			auctionDao.testDweet(product);
 	}

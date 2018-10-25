@@ -14,14 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import entities.Account;
 import entities.Bid;
-
-/**
- * 
- * @author Alejandro Rodriguez
- * Dat250 course
- *
- *Session Controller for validate an user 
- */
+import entities.Role;
 
 @Named(value = "sessionController")
 @SessionScoped
@@ -58,10 +51,16 @@ public class SessionController implements Serializable {
 
 	public String validateUsernamePassword() {
 		HttpSession session = SessionUtils.getSession();
-		Query query = em.createQuery("SELECT a FROM Account a WHERE a.email = '" + this.username + "'");
-		Account account = (Account) query.getSingleResult();
-		if(this.password.equals(account.getPassword())) {
+		Query accountQuery = em.createQuery("SELECT a FROM Account a WHERE a.email = '" + this.username + "'");
+		Account account = (Account) accountQuery.getSingleResult();
+		
+		Query roleQuery = em.createQuery("SELECT r FROM Role r JOIN r.account a WHERE a.accountId = '" + account.getAccountId() + "'");
+		Role role = (Role) roleQuery.getSingleResult();
+		
+ 		if(this.password.equals(account.getPassword())) {
 			session.setAttribute(Constants.USERNAME, this.username);
+			session.setAttribute(role.getRole(), this.username);
+			session.setAttribute(Constants.USERID, account.getAccountId());
 			return Constants.INDEX;
 		}
 		return account.getPhone();

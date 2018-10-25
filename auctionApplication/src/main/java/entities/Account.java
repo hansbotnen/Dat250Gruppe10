@@ -50,15 +50,17 @@ public class Account implements Serializable {
 
 	public static final String FIND_ALL = "Account.findAll";
 	
-	public Account(String name, String phone, float rating, String email) {
+	public Account(String name, String phone, float rating, String email, String password) {
 		this.name = name;
 		this.phone = phone;
 		this.rating = rating;
 		this.email = email;
+		this.password = password;
 		catalog=new ProductCatalog(this);
 	}
 
-	public Account() {catalog=new ProductCatalog(this);
+	public Account() {
+		catalog=new ProductCatalog(this);
 	}
 
 	public int getAccountId() {
@@ -101,19 +103,18 @@ public class Account implements Serializable {
 		return password;
 	}
 
-	public void setPassword(String email) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public void setProductCatalog(ProductCatalog catalog) {
-		this.catalog = catalog;
-	}
-	
-	
+		
 	public ProductCatalog getProductCatalog() {
 		return catalog;
 	}
 
+	public void setProductCatalog(ProductCatalog catalog) {
+		this.catalog = catalog;
+	}
+	
 //	public void addFeedback(Feedback feedback) {
 //		feedbacks.add(feedback);
 //		if (!feedback.getAccount().equals(this))

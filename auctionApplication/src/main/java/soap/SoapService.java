@@ -40,10 +40,10 @@ public class SoapService {
 	 *														*
 	 ********************************************************/
 
-	public void createAccount(String name, String phone, float rating, String email) {
+	public void createAccount(String name, String phone, float rating, String email, String password) {
 		if (name == null)
 			throw new BadRequestException();
-		Account account = new Account(name, phone, rating, email);
+		Account account = new Account(name, phone, rating, email, password);
 		dao.createAccountSoap(account);
 	}
 	

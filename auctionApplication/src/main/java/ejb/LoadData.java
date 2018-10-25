@@ -14,6 +14,7 @@ import entities.Account;
 import entities.Bid;
 import entities.Product;
 import entities.ProductCatalog;
+import entities.Role;
 /*
  * Så langt lager den bare brukere og persister de
  */
@@ -35,7 +36,7 @@ public class LoadData {
 		accounts.get(0).getProductCatalog().addProduct(p2);
 		Bid bid1 = new Bid(500, p1, accounts.get(1));
 		
-		
+		accounts.forEach(s->em.persist(new Role(s)));
 		accounts.forEach(s->em.persist(s));
 	
 		em.flush();
@@ -141,7 +142,9 @@ public class LoadData {
 				String email = name.toLowerCase().replaceAll(" ", "")
 						+ emailSuffix.get(rand.nextInt(emailSuffix.size()));
 				
-				accounts.add(new Account(name,phoneNumber,rating,email));
+				String password = "test1234";
+				
+				accounts.add(new Account(name,phoneNumber,rating,email,password));
 				
 			}
 			else

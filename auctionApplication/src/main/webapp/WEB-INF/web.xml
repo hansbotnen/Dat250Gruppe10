@@ -1,39 +1,55 @@
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-	version="3.1">
-	<display-name>Auction Application</display-name>
-	<context-param>
-		<param-name>javax.faces.PROJECT_STAGE</param-name>
-		<param-value>Development</param-value>
-	</context-param>
-	<servlet>
-		<servlet-name>Faces Servlet</servlet-name>
-		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Faces Servlet</servlet-name>
-		<url-pattern>*.xhtml</url-pattern>
-	</servlet-mapping>
-	<session-config>
-		<session-timeout>30</session-timeout>
-	</session-config>
-	<servlet>
-		<servlet-name>Jersey REST Service</servlet-name>
-		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
-		<init-param>
-			<param-name>jersey.config.server.provider.packages</param-name>
-			<param-value>rest</param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Jersey REST Service</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
-	<welcome-file-list>
-		<welcome-file>login.xhtml</welcome-file>
-	</welcome-file-list>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <display-name>Auction Application</display-name>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <servlet>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>rest</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>login.xhtml</welcome-file>
+    </welcome-file-list>
+    <security-constraint>
+        <display-name>Login_Constraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>SecureLogin</web-resource-name>
+            <description/>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+    <security-role>
+        <description/>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <description/>
+        <role-name>user</role-name>
+    </security-role>
 </web-app>

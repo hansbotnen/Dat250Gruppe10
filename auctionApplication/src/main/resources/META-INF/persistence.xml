@@ -12,6 +12,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	 	<class>entities.Product</class>
 	 	<class>entities.ProductCatalog</class>
 	 	<class>entities.Bid</class>
+	 	<class>entities.Role</class>
 		<properties>
       		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>

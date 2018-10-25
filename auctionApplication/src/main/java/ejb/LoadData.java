@@ -1,7 +1,9 @@
 package ejb;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +14,7 @@ import javax.jms.JMSException;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 
 import entities.Account;
 import entities.Bid;
@@ -39,20 +42,23 @@ public class LoadData {
 		accounts.get(0).getProductCatalog().addProduct(p1);
 		accounts.get(0).getProductCatalog().addProduct(p2);
 		Bid bid1 = new Bid(500, p1, accounts.get(1));
+		Bid bid2 = new Bid(2000, p2, accounts.get(1));
 		
+		p2.setAuctionTime(40);
 		
 		accounts.forEach(s->em.persist(s));
 	
 		em.flush();
-		try {
-			dao.testDweet(p1);
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+//		try {
+//			dao.testDweet(p1);
+//		} catch (NamingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (JMSException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 		
 //		Account acc1 = new Account("Philip", "87654321", 5, "philip@hvl.no");
@@ -185,7 +191,7 @@ public class LoadData {
 			Product p = new Product();
 			p.setProductName(name);
 			p.setFeatures(description);
-			p.setPublish(rand.nextBoolean());
+			p.setPublished(rand.nextBoolean());
 			products.add(p);
 		}
 		return products;

@@ -72,7 +72,7 @@ public class SoapService {
 		product.setProductName(productName);
 		product.setPicture(picture);
 		product.setFeatures(features);
-		product.setPublish(publish);
+		product.setPublished(publish);
 		dao.createProductSoap(product);
 	}
 

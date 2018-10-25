@@ -15,7 +15,7 @@ import entities.Bid;
 import entities.Product;
 import entities.ProductCatalog;
 /*
- * Så langt lager den bare brukere og persister de
+ * Sï¿½ langt lager den bare brukere og persister de
  */
 @Singleton
 @Startup
@@ -62,7 +62,7 @@ public class LoadData {
 //	
 //		
 //		Product p3 = new Product("PC", "PC.jpg", "private computer");
-//		Product p4 = new Product("Datamus", "mus.jpg", "Trådløs");
+//		Product p4 = new Product("Datamus", "mus.jpg", "Trï¿½dlï¿½s");
 //		
 //		
 //

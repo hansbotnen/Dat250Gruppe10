@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
@@ -23,6 +24,7 @@ import entities.Product;
 import entities.Products;
 
 @Named(value = "auctionController")
+@Singleton
 public class AuctionController {
 	
 	@PersistenceContext(unitName="auctionApplication")
@@ -34,7 +36,7 @@ public class AuctionController {
 	
 	ArrayList<Integer> addedProductIds = new ArrayList<>();
 	
-	@Schedule(hour="*",minute="*",second="*/20")
+	@Schedule(hour="*",minute="*",second="*/10", persistent=false)
 	public void addTimers() {
 		Products products = auctionDao.getAllProducts();
 		for(Product p:products) {
@@ -58,6 +60,12 @@ public class AuctionController {
 	public void timeout(Timer timer) throws NamingException, JMSException {
 		Product product = (Product) timer.getInfo();
 		addedProductIds.remove(product.getId());
+		
+		em.getTransaction().begin();
+		product.setCompleted(true);
+		product.setPublished(false);
+		em.getTransaction().commit();
+		
 		if(product.getBid()!=null)
 			auctionDao.testDweet(product);
 	}

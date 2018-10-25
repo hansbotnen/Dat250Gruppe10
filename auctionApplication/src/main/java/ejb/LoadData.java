@@ -44,7 +44,8 @@ public class LoadData {
 		Bid bid1 = new Bid(500, p1, accounts.get(1));
 		Bid bid2 = new Bid(2000, p2, accounts.get(1));
 		
-		p2.setAuctionTime(40);
+		p2.setAuctionTime(20);
+		p1.setAuctionTime(15);
 		
 		accounts.forEach(s->em.persist(s));
 	

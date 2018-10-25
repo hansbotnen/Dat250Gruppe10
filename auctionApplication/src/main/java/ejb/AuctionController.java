@@ -5,13 +5,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.DependsOn;
 import javax.ejb.EJB;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 import javax.ejb.Stateless;
 import javax.ejb.Timeout;
 import javax.ejb.Timer;
+import javax.ejb.TimerConfig;
 import javax.ejb.TimerService;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -20,11 +28,15 @@ import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import entities.Account;
+import entities.Bid;
 import entities.Product;
 import entities.Products;
 
 @Named(value = "auctionController")
 @Singleton
+@Startup
+@DependsOn("LoadData")
 public class AuctionController {
 	
 	@PersistenceContext(unitName="auctionApplication")
@@ -36,36 +48,22 @@ public class AuctionController {
 	
 	ArrayList<Integer> addedProductIds = new ArrayList<>();
 	
-	@Schedule(hour="*",minute="*",second="*/10", persistent=false)
+	@PostConstruct
+	@Schedule(hour="*",minute="*",second="*/10")
 	public void addTimers() {
 		Products products = auctionDao.getAllProducts();
 		for(Product p:products) {
 			if(p.isPublished() && !addedProductIds.contains(p.getId())) {
 				addedProductIds.add(p.getId());
-				timerService.createTimer(p.getAuctionTime()*1000, p);
+				timerService.createTimer(p.getAuctionTime()*1000, p.getId());
 			}
 		}
 	}
 	
-	private Date createEndTime(int seconds) {
-		Date endTime = new Date();
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(endTime);
-		cal.add(Calendar.SECOND, seconds);
-		endTime = cal.getTime();
-		return endTime;
-	}
-	
 	@Timeout
 	public void timeout(Timer timer) throws NamingException, JMSException {
-		Product product = (Product) timer.getInfo();
-		addedProductIds.remove(product.getId());
-		
-		em.getTransaction().begin();
-		product.setCompleted(true);
-		product.setPublished(false);
-		em.getTransaction().commit();
-		
+		int productId = (int) timer.getInfo();
+		Product product = auctionDao.getProduct(""+productId);	
 		if(product.getBid()!=null)
 			auctionDao.testDweet(product);
 	}

@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
+import javax.inject.Named;
 import javax.jms.JMSException;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
@@ -25,6 +26,7 @@ import entities.ProductCatalog;
  */
 @Singleton
 @Startup
+@Named(value = "loadData")
 public class LoadData {
 	
 	@PersistenceContext(unitName = "auctionApplication")
@@ -50,6 +52,7 @@ public class LoadData {
 		accounts.forEach(s->em.persist(s));
 	
 		em.flush();
+		
 
 //		try {
 //			dao.testDweet(p1);

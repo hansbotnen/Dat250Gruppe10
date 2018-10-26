@@ -49,7 +49,7 @@ public class AuctionController {
 	ArrayList<Integer> addedProductIds = new ArrayList<>();
 	
 	@PostConstruct
-	@Schedule(hour="*",minute="*",second="*/10")
+	@Schedule(hour="*",minute="*",second="*")
 	public void addTimers() {
 		Products products = auctionDao.getAllProducts();
 		for(Product p:products) {

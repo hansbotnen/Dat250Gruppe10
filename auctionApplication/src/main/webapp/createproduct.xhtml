@@ -32,6 +32,9 @@
 			
 			<h:outputLabel for="bidAmount">Starting bid:</h:outputLabel>
 			<h:inputText id="bidAmount" value="#{productController.bid.bidAmount}" required="true"></h:inputText>
+			
+			<h:outputLabel for="auctionTime">Auction time:</h:outputLabel>
+			<h:inputText id="Auctiontime" value="#{productController.product.auctionTime}" required="true"></h:inputText>
 			  		
 			<h:commandButton action="#{productController.createProduct()}"  value="Add product"/>
 		</h:panelGrid>

@@ -23,7 +23,7 @@ public class Product implements Serializable {
 	private int productId;
 
 	private String productName;
-	private String picture; // Changes to type Image
+	private String image; // Changes to type Image
 	private String features; // Description
 	private Boolean published = false;
  
@@ -41,16 +41,16 @@ public class Product implements Serializable {
 
 	public Product() {}
 	
-	public Product(String productName, String picture, String features) {
+	public Product(String productName, String image, String features) {
 		this.productName = productName;
-		this.picture = picture;
+		this.image = image;
 		this.features = features; 
 		//catalog.addProduct(this);
 	}
 	
-	public Product(String productName, String picture, String features, Bid bid, ProductCatalog catalog) {
+	public Product(String productName, String image, String features, Bid bid, ProductCatalog catalog) {
 		this.productName = productName;
-		this.picture = picture;
+		this.image = image;
 		this.features = features; 
 		this.bid = bid;
 		this.catalog = catalog;
@@ -58,7 +58,7 @@ public class Product implements Serializable {
 		catalog.addProduct(this);
 	}
 	
-	public int getId() {
+	public int getProductId() {
 		return productId;
 	}
 
@@ -71,12 +71,12 @@ public class Product implements Serializable {
 	}
 
 	// Must change to type Image
-	public String getPicture() {
-		return picture;
+	public String getImage() {
+		return image;
 	}
 
-	public void setPicture(String picture) {
-		this.picture = picture;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public String getFeatures() {

@@ -81,7 +81,7 @@ public class AuctionDao {
 		
 		em.persist(catalog);
 		em.persist(product);
-		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getId())).build();
+		URI productUri = uriInfo.getAbsolutePathBuilder().path(Integer.toString(product.getProductId())).build();
 		return productUri;
 	}
 	
@@ -112,6 +112,14 @@ public class AuctionDao {
 		em.persist(bid);
 	}
 	
+	public void updateBid(Bid bid, int bidAmount) {
+		Account acc = bid.getAccount();
+		Product prod = bid.getProduct();
+		bid.setBidAmount(bidAmount);
+		bid.setProduct(prod);
+		bid.setAccount(acc);
+	}
+	
 	public Bid getBid(String id) {
 		int idInt = Integer.parseInt(id);
 		Bid bid = em.find(Bid.class, idInt);
@@ -124,5 +132,21 @@ public class AuctionDao {
 		return bids;
 	}
 	
+	public void bidOnProduct(int bidAmount, Product product) {
+        if (product.getBid() == null) {
+            Bid bid = new Bid();
+            product.setBid(bid);
+            bid.setProduct(product);
+        }
+        product.getBid().setBidAmount(bidAmount);
+        em.flush();
+    }
+	
+	public void createBidonProduct(Bid bid, Product product) {
+        bid.setProduct(product);
+        product.setBid(bid);
+        em.persist(bid);
+        em.persist(product);
+    }
 	
 }

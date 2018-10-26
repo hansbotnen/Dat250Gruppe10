@@ -70,7 +70,7 @@ public class SoapService {
 		
 		Product product = new Product();
 		product.setProductName(productName);
-		product.setPicture(picture);
+		product.setImage(picture);
 		product.setFeatures(features);
 		product.setPublish(publish);
 		dao.createProductSoap(product);

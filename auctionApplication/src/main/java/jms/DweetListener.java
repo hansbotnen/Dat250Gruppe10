@@ -18,11 +18,17 @@ public class DweetListener implements MessageListener{
 		try {
 			Product product = message.getBody(Product.class);
 			JsonObject json = new JsonObject();
-			json.addProperty("productId", product.getProductId());
-			json.addProperty("productName", product.getProductName());
-			json.addProperty("bidderId", product.getBid().getAccount().getAccountId());
-			json.addProperty("bidderName", product.getBid().getAccount().getName());
-			json.addProperty("bidAmount", product.getBid().getBidAmount());
+			if(product!= null) {
+				json.addProperty("productId", product.getProductId());
+				json.addProperty("productName", product.getProductName());
+				if(product.getBid()!=null) {
+					if(product.getBid().getAccount()!=null) {
+						json.addProperty("bidderId", product.getBid().getAccount().getAccountId());
+						json.addProperty("bidderName", product.getBid().getAccount().getName());
+					}
+					json.addProperty("bidAmount", product.getBid().getBidAmount());
+				}
+			}
 			DweetConnection dc = new DweetConnection();
 			dc.publish(json);
 		} catch (JMSException e) {

@@ -4,6 +4,7 @@ package ejb;
 import java.net.URI;
 import java.util.ArrayList;
 
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
+import javax.jms.JMSException;
 import javax.jms.JMSSessionMode;
+import javax.jms.Topic;
 import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,6 +39,18 @@ public class AuctionDao {
 	private UriInfo uriInfo;
 	@PersistenceContext(unitName="auctionApplication")
     private EntityManager em;
+	
+	@Inject
+	@JMSConnectionFactory("jms/dat250/ConnectionFactory")
+	@JMSSessionMode(JMSContext.AUTO_ACKNOWLEDGE)
+	private JMSContext context;
+	
+	@Resource(lookup = "jms/dat250/Topic")
+	private Topic topic;
+	
+	public void testDweet(Product product) throws NamingException, JMSException {
+		context.createProducer().send(topic,product);
+	}
 	
 	public URI createAccountRest(Account account) {
 		account.getProductCatalog().setCatalogName(account.getName()+"'s Catalog");

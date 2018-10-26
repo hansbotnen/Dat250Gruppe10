@@ -1,13 +1,26 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 
+import javax.annotation.Resource;
+import javax.ejb.EJB;
+import javax.ejb.Schedule;
+import javax.ejb.Timeout;
+import javax.ejb.Timer;
+import javax.ejb.TimerConfig;
+import javax.ejb.TimerService;
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
+import ejb.AuctionController;
+import ejb.AuctionDao;
 
 @Entity
 @XmlRootElement
@@ -16,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Product implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,9 +40,11 @@ public class Product implements Serializable {
 	private String image; // Changes to type Image
 	private String features; // Description
 	private Boolean published = false;
+	private boolean completed =  false;
  
-//	@Temporal(TemporalType.TIMESTAMP)
-//	private Date endTime; // java.util.Date || java.util.Calendar
+	private int auctionTime=-1; // java.util.Date || java.util.Calendar
+	
+	
 	
 	@ManyToOne
 	private ProductCatalog catalog;
@@ -56,6 +72,12 @@ public class Product implements Serializable {
 		this.catalog = catalog;
 		bid.setProduct(this);
 		catalog.addProduct(this);
+	}
+	
+	@Timeout
+	public void timeout() {
+		completed = true;
+		published = false;
 	}
 	
 	public int getProductId() {
@@ -91,7 +113,7 @@ public class Product implements Serializable {
 		return published;
 	}
 
-	public void setPublish(Boolean publish) {
+	public void setPublished(Boolean publish) {
 		this.published = publish;
 	}
 	
@@ -107,9 +129,24 @@ public class Product implements Serializable {
 		this.catalog = catalog;
 	}
 	
-	
 	public ProductCatalog getProductCatalog() {
 		return catalog;
 	}
+	
+	public void setAuctionTime(int endTime) {
+		this.auctionTime=endTime;
+		published = true; // published after adding auctionTime ok?
+		completed = false;
+	} 
+	
+	public int getAuctionTime() {
+		return auctionTime;
+	}
 
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
+	}
+	public boolean getCompleted() {
+		return completed;
+	}
 }

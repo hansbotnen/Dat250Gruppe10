@@ -2,11 +2,11 @@
 
 Creating an auction application with Java EE.
 
-Delivery assignment 3:
-Fixed issues from previous assignment except for JSON.
+Delivery assignment 4:
 
-Some business logic is implemented, our services are using DAO 
-that is communicating with the DB.
+The frontend is a bit messy, but the most of our wanted functionality should be there.
 
-SOAP is working as intended for the assignment plus some extra
-functinoaly because it was easily made with the DAO.
+Login is working and secure with https, and each user has a role either "user" or "admin".
+There are no admin pages or functionality added, so admin is not actually used.
+
+When an auction times out, the auction info will be sent to dweet.io using JMS.

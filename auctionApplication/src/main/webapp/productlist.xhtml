@@ -26,6 +26,7 @@
                        <h:outputLabel value="Description: "/><h:outputText value="#{pr.features}" /><br/>
                        <h:outputLabel value="Image: "/><h:outputText value="#{pr.image}" /><br/>
                        <h:outputLabel value="BidAmount: "/><h:outputText value="#{pr.bid.bidAmount}"/> <br/>
+                       <h:outputLabel value="Time: "/><h:outputText value="#{pr.auctionTime}"/> <br/>
                        <h:commandButton value="More information" action="#{productController.parametersAction()}">
                         <f:param id="param1" name="productId" value="#{pr.productId}"/>
                     </h:commandButton>

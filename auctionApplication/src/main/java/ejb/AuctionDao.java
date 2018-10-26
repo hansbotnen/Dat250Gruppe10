@@ -128,11 +128,8 @@ public class AuctionDao {
 	}
 	
 	public void updateBid(Bid bid, int bidAmount) {
-		Account acc = bid.getAccount();
-		Product prod = bid.getProduct();
 		bid.setBidAmount(bidAmount);
-		bid.setProduct(prod);
-		bid.setAccount(acc);
+        em.flush();
 	}
 	
 	public Bid getBid(String id) {
@@ -154,7 +151,6 @@ public class AuctionDao {
             bid.setProduct(product);
         }
         product.getBid().setBidAmount(bidAmount);
-        em.flush();
     }
 	
 	public void createBidonProduct(Bid bid, Product product) {

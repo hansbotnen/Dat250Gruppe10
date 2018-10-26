@@ -24,7 +24,7 @@ import ejb.AuctionDao;
 
 @Entity
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT b From Product b") })
+@NamedQueries({ @NamedQuery(name = "Product.findAll", query = "SELECT b From Product b where b.published = true") })
 @Table(name = "product")
 public class Product implements Serializable {
 

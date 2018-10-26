@@ -47,8 +47,8 @@ public class LoadData {
 		Bid bid1 = new Bid(500, p1, accounts.get(1));
 		Bid bid2 = new Bid(2000, p2, accounts.get(1));
 
-		p2.setAuctionTime(20);
-		p1.setAuctionTime(15);
+		p2.setAuctionTime(300);
+		p1.setAuctionTime(90);
 		
 		accounts.forEach(s->em.persist(new Role(s)));
 		accounts.forEach(s->em.persist(s));
@@ -147,6 +147,8 @@ public class LoadData {
 		
 		//Just to avoid adding multiple dummy-users with the same name
 		ArrayList<String> takenNames = new ArrayList<>();
+		
+		accounts.add(new Account("Phil", "12345678", 0, "dr@phil.com", "test1234"));
 		
 		for(int i=0;i<n;i++) {
 			String name = rand.nextBoolean() ?

@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const artworkRouter = require('./artwork/artworkRouter')
+const artworkRouter = require('./artwork/ArtworkRouter')
 const app = express();
 const port = 3000;
 

@@ -1,0 +1,14 @@
+{
+  "name": "artjungle",
+  "version": "1.0.0",
+  "description": "Application for selling and displaying art",
+  "main": "\u001b[D\u001b[A\u001bserver.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Group10",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}

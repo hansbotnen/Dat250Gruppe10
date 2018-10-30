@@ -10,7 +10,13 @@ class ArtworkService {
   }
 
   getById(reqId) {
-    return this.artworks.find(obj => ''+obj.id === reqId);
+    return this.artworks.find(obj => obj.id == reqId);
+  }
+
+  createArtwork(name, artist){
+    var newArtwork = new artwork(this.artworks.length+1, name, artist);
+    this.artworks.push(newArtwork);
+    return newArtwork;
   }
 }
 module.exports = new ArtworkService();

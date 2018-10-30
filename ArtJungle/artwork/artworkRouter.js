@@ -1,4 +1,10 @@
 const express = require('express');
-const artwork = require('./Artwork')
+const artwork = require('./artwork')
+const artworkService = require('./ArtworkService')
 const artworkRouter = express.Router();
-const artworks = [new artwork(1,'Skrik', 'Munch'), new artwork(2, 'Mona Lisa')];
+
+artworkRouter.get('/', (req, res) => {
+  res.json(artworkService.getAll());
+});
+
+module.exports = artworkRouter;

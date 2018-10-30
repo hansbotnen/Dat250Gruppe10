@@ -8,5 +8,9 @@ class ArtworkService {
   getAll() {
     return this.artworks;
   }
+
+  getById(reqId) {
+    return this.artworks.find(obj => ''+obj.id === reqId);
+  }
 }
 module.exports = new ArtworkService();

@@ -2,6 +2,7 @@ const express = require('express');
 const account = require('./account');
 const accountService = require('./AccountService');
 const accountRouter = express.Router();
+const artworkService = require('../artwork/ArtworkService');
 
 
 accountRouter.route('/')
@@ -37,5 +38,12 @@ accountRouter.route('/:accountId')
     console.log('Updating account with id: ' + accountId);
     res.json(accountService.updateById(accountId, req.body));
   })
+
+  accountRouter.route('/:accountId/artworks')
+    .get((req, res) => {
+      const accountId = req.params.accountId;
+      console.log('Fetching all artworks with owner id: '+ accountId);
+      res.json(artworkService.getByOwnerId(accountId));
+    })
 
 module.exports = accountRouter;

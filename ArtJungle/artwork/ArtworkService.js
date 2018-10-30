@@ -32,5 +32,9 @@ class ArtworkService {
     this.artworks.push(artwork);
     return artwork;
   }
+
+  getByOwnerId(reqId){
+    return this.artworks.filter(obj => obj.ownerId == reqId);
+  }
 }
 module.exports = new ArtworkService();

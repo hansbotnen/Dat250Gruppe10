@@ -3,7 +3,7 @@ const createId = require('../utils/idUtil');
 
 class AccountService {
   constructor() {
-    this.accounts = [new account('2721','Olav Thon'), new account(createId(), 'Mikal Fuglestein')];
+    this.accounts = [new account('2721','Olav Thon'), new account('a75b', 'Mikal Fuglestein')];
   }
 
   getAll() {
@@ -15,6 +15,7 @@ class AccountService {
   }
 
   createAccount(name) {
+    // TODO: validate input
     var newAccount = new account(createId(), name);
     this.accounts.push(newAccount);
     return newAccount;
@@ -27,6 +28,7 @@ class AccountService {
   }
 
   updateById(reqId, req) {
+    // TODO: validate input
     var account = this.deleteById(reqId);
     account = Object.assign({}, account, req);
     this.accounts.push(account);

@@ -3,7 +3,7 @@ const createId = require('../utils/idUtil');
 
 class ArtworkService {
   constructor() {
-    this.artworks = [new artwork(createId(),'Skrik','Munch', '2721'), new artwork(createId(), 'Listhaug', 'AFK', '2721')];
+    this.artworks = [new artwork(createId(),'Skrik','Munch', '2721'), new artwork('701a', 'Listhaug', 'AFK', '2721')];
   }
 
   getAll() {
@@ -15,6 +15,7 @@ class ArtworkService {
   }
 
   createArtwork(name, artist, ownerId) {
+    // TODO: validate input
     var newArtwork = new artwork(createId(), name, artist, ownerId);
     this.artworks.push(newArtwork);
     return newArtwork;
@@ -27,6 +28,7 @@ class ArtworkService {
   }
 
   updateById(reqId, req) {
+    // TODO: validate input
     var artwork = this.deleteById(reqId);
     artwork = Object.assign({}, artwork, req);
     this.artworks.push(artwork);

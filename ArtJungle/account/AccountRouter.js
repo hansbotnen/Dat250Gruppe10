@@ -3,6 +3,7 @@ const account = require('./account');
 const accountService = require('./AccountService');
 const accountRouter = express.Router();
 const artworkService = require('../artwork/ArtworkService');
+const bidService = require('../bid/BidService');
 
 
 accountRouter.route('/')
@@ -12,14 +13,7 @@ accountRouter.route('/')
   })
   .post((req, res) =>{
     const name = req.body.name;
-    if(name == undefined) {
-      console.log('Cannot add account with name: ' + name);
-      res.json();
-    }
-    else{
-      console.log('Adding account with name: ' + name);
-      res.json(accountService.createAccount(name));
-    }
+    res.json(accountService.createAccount(name));
   })
 
 accountRouter.route('/:accountId')
@@ -44,6 +38,13 @@ accountRouter.route('/:accountId')
       const accountId = req.params.accountId;
       console.log('Fetching all artworks with owner id: '+ accountId);
       res.json(artworkService.getByOwnerId(accountId));
+    })
+
+  accountRouter.route('/:accountId/bids')
+    .get((req, res) => {
+      const accountId = req.params.accountId;
+      console.log('Fetching all bids with bidder id: ' + accountId);
+      res.json(bidService.getByBidderId(accountId));
     })
 
 module.exports = accountRouter;

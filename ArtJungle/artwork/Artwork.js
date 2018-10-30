@@ -4,6 +4,7 @@ class Artwork{
       this.name=name;
       this.artist=artist;
       this.ownerId=ownerId;
+      this.bids = 'http://localhost:3000/artwork/'+id+'/bids';
     }
 }
 module.exports = Artwork;

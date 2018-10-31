@@ -1,29 +1,19 @@
 const Artwork = require('../models/artwork.model.js');
 
-// Create and Save a new Note
 exports.create = (req, res) => {
-    // Validate request
-    if(!req.body.content) {
-        return res.status(400).send({
-            message: "Note content can not be empty"
-        });
+    if(!req.body.name || !req.body.artist) {
+        res.status(400).send();
     }
 
-    // Create a Note
     const art = new Artwork({
         name: req.body.name, 
         artist: req.body.artist
     });
 
-    // Save Note in the database
-    art.save()
-    .then(data => {
-        res.send(data);
-    }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the Artwork."
-        });
-    });
+    art.save(function (err) { 
+        if (err) res.status(500);
+        res.status(201).send(art);
+    })
 };
 
 exports.findAll = (req, res) => {

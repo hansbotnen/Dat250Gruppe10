@@ -10,13 +10,13 @@ const app = express();
 const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(morgan("dev"));
 app.use(bodyParser.json())
-app.get('/gfyu', (req, res) => {
+app.use(morgan("dev"));
+app.get('/', (req, res) => {
     res.json("Hello World");
 });
 require('./artwork/artworkRouter')(app);
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log("Server is listening on port 3000");
 });
 

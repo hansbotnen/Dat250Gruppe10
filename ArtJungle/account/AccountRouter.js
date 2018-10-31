@@ -13,6 +13,7 @@ accountRouter.route('/')
   })
   .post((req, res) =>{
     const name = req.body.name;
+    console.log('Adding account with name: ' + name);
     res.json(accountService.createAccount(name));
   })
 

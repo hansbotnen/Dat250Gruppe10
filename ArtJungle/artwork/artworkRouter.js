@@ -13,6 +13,7 @@ artworkRouter.route('/')
   .post((req, res) =>{
     const name = req.body.name;
     const artist = req.body.artist;
+    console.log('Adding artwork with name: ' + name + ' by artist: '+ artist);
     res.json(artworkService.createArtwork(name,artist));
   })
 

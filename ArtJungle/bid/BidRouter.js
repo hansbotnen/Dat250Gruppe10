@@ -12,6 +12,7 @@ bidRouter.route('/')
     var bidderId = req.body.bidderId;
     var artworkId = req.body.artworkId;
     var bidAmount = req.body.bidAmount;
+    console.log('Adding bid by account: ' + bidderId + ' on artwork: ' + artworkId + ' of amount: ' + bidamount);
     res.json(bidService.createBid(bidderId,artworkId,bidAmount));
   })
 

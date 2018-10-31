@@ -1,11 +1,25 @@
 const express = require('express');
-const account = require('./account');
-const accountService = require('./AccountService');
 const accountRouter = express.Router();
-const artworkService = require('../artwork/ArtworkService');
-const bidService = require('../bid/BidService');
+const accountController = require('../controllers/account.controller.js');
+module.exports = (app) => {
+  const account = require('../controllers/account.controller.js');
+   app.post('/account', account.create);
 
+   app.get('/account', account.findAll);
 
+   app.get('/account/:accountId', account.findOne);
+
+   app.delete('/account/:accountId', account.deleteOne);
+
+   app.put('/account/:accountId', account.updateOne);
+   //app.get('/account/:accountId/artworks', artwork.getByOwnerId);
+   //app.get('/account/:accountId/bids',bid.getByBidderId);
+}
+/*
+accountRouter.route('/')
+  .get(accountController.findAll)
+  .post(accountController.create)
+/*
 accountRouter.route('/')
   .get((req, res) => {
     console.log('Fetching all accounts');
@@ -48,3 +62,4 @@ accountRouter.route('/:accountId')
     })
 
 module.exports = accountRouter;
+*/

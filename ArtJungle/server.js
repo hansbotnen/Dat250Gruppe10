@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
     res.json("Hello World");
 });
 require('./artwork/artworkRouter')(app);
+require('./account/accountRouter')(app);
 app.listen(port, () => {
     console.log("Server is listening on port 3000");
 });
@@ -24,7 +25,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url, {
     useNewUrlParser: true
 }).then(() => {
-    console.log("Successfully connected to the database");    
+    console.log("Successfully connected to the database");
 }).catch(err => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();

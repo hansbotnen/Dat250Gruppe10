@@ -1,7 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const artworkRouter = require('./artwork/ArtworkRouter')
+const artworkRouter = require('./artwork/ArtworkRouter');
+const accountRouter = require('./account/accountRouter');
+const bidRouter = require('./bid/bidRouter');
 const app = express();
 const port = 3000;
 
@@ -13,3 +15,5 @@ app.listen(port, () => {
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use('/artwork', artworkRouter);
+app.use('/account', accountRouter);
+app.use('/bid', bidRouter);

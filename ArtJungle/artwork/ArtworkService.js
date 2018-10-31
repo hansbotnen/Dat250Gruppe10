@@ -1,9 +1,18 @@
 const artwork = require('./artwork');
 const createId = require('../utils/idUtil');
+const dummies = require('../utils/dummyDataUtil');
 
 class ArtworkService {
   constructor() {
-    this.artworks = [new artwork(createId(),'Skrik','Munch'), new artwork(createId(), 'Listhaug', 'AFK')];
+    this.artworks = dummies.artworkDummies;
+  }
+
+  addDummies(dummies) {
+    this.artworks = dummies;
+  }
+
+  idExists(id) {
+    return this.getById(id) != undefined;
   }
 
   getAll() {
@@ -14,8 +23,9 @@ class ArtworkService {
     return this.artworks.find(obj => obj.id == reqId);
   }
 
-  createArtwork(name, artist) {
-    var newArtwork = new artwork(createId(), name, artist);
+  createArtwork(name, artist, ownerId) {
+    // TODO: validate input
+    var newArtwork = new artwork(createId(), name, artist, ownerId);
     this.artworks.push(newArtwork);
     return newArtwork;
   }
@@ -27,10 +37,15 @@ class ArtworkService {
   }
 
   updateById(reqId, req) {
+    // TODO: validate input
     var artwork = this.deleteById(reqId);
     artwork = Object.assign({}, artwork, req);
     this.artworks.push(artwork);
     return artwork;
+  }
+
+  getByOwnerId(reqId){
+    return this.artworks.filter(obj => obj.ownerId == reqId);
   }
 }
 module.exports = new ArtworkService();

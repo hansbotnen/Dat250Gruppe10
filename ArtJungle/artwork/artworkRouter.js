@@ -4,8 +4,14 @@ const artworkService = require('./ArtworkService');
 const artworkRouter = express.Router();
 const bidService = require('../bid/BidService');
 
-
-artworkRouter.route('/')
+module.exports = (app) => {
+  const artwork = require('../controllers/artwork.controller.js');
+   app.post('/artwork', artwork.create);
+   
+   app.get('/artwork', artwork.findAll);
+}
+/*
+artworkRouter.route('/art')
   .get((req, res) => {
     console.log('Fetching all artworks');
     res.json(artworkService.getAll());
@@ -41,3 +47,4 @@ artworkRouter.route('/:artworkId/bids')
   })
 
 module.exports = artworkRouter;
+*/

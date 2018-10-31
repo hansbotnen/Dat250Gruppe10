@@ -1,9 +1,18 @@
 const artwork = require('./artwork');
 const createId = require('../utils/idUtil');
+const dummies = require('../utils/dummyDataUtil');
 
 class ArtworkService {
   constructor() {
-    this.artworks = [new artwork(createId(),'Skrik','Munch', '2721'), new artwork('701a', 'Listhaug', 'AFK', '2721')];
+    this.artworks = dummies.artworkDummies;
+  }
+
+  addDummies(dummies) {
+    this.artworks = dummies;
+  }
+
+  idExists(id) {
+    return this.getById(id) != undefined;
   }
 
   getAll() {

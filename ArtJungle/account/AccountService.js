@@ -1,9 +1,14 @@
 const account = require('./account');
 const createId = require('../utils/idUtil');
+const dummies = require('../utils/dummyDataUtil');
 
 class AccountService {
   constructor() {
-    this.accounts = [new account('2721','Olav Thon'), new account('a75b', 'Mikal Fuglestein')];
+    this.accounts = dummies.accountDummies;
+  }
+
+  idExists(id) {
+    return this.getById(id) != undefined;
   }
 
   getAll() {

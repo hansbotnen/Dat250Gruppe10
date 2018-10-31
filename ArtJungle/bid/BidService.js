@@ -1,9 +1,18 @@
 const bid = require('./bid');
 const createId = require('../utils/idUtil');
+const dummies = require('../utils/dummyDataUtil');
 
 class BidService{
   constructor() {
-    this.bids = [new bid(createId(), 'a75b','701a',3.50)];
+    this.bids = dummies.bidDummies;
+  }
+
+  addDummies(dummies) {
+    this.bids = dummies;
+  }
+
+  idExists(id) {
+    return this.getById(id) != undefined;
   }
 
   getAll() {

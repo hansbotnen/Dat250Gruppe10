@@ -8,7 +8,9 @@ const mongoose = require('mongoose');
 const LoadData = require('./LoadData.js');
 const app = express();
 const port = 3000;
+const cors = require('cors')
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(morgan("dev"));
@@ -20,6 +22,7 @@ require('./account/accountRouter')(app);
 app.listen(port, () => {
     console.log("Server is listening on port 3000");
 });
+
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url, {

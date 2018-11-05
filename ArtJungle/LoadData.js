@@ -1,53 +1,61 @@
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/mydb";
 const Artwork = require('./models/artwork.model.js');
 const Account = require('./models/account.model.js');
 const Bid = require('./models/bid.model.js');
-const collections = ["Artwork", "User", "Bid"];
+const mongoose = require('mongoose');
+var ids = [];
 
-class LoadData{
-    load(){
-        var models = [
-            new Artwork({
-                name:"Skrik", 
-                artist:"Munch"
-            }),
-            new Artwork({
-                name:"Skrik", 
-                artist:"Munch"
-            }),
-            new Account({
-                name:"Philip", 
-                phone:"98765432",
-                email:"phil@ip.com"
-            }),
-            new Bid({
-                bidAmount:"100", 
-            })];
-        models.forEach(m => m.save(function (err) { if (err) return handleError(err); }));
-    }
+//Create id's before creating models s.t. they can be used when creating relations
+for(i = 0; i < 7 ; i++){
+    ids[i] = new mongoose.Types.ObjectId();
 }
-module.exports = LoadData;
-/*
-MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db("mydb");
 
-    //Remove all existing collections in the DB
-    collections.forEach(col => dbo.dropCollection(col, function(err, res) {}));
+var models = [
+    new Artwork({
+        _id:ids[0],
+        name:"Skrik", 
+        artist:"Munch",
+        account: ids[3],
+        bid: ids[5]
+    }),
+    new Artwork({
+        _id:ids[1],
+        name:"Listhaug", 
+        artist:"Mikal",
+        account: ids[4],
+        bid: ids[6]
+    }),
+    new Account({
+        _id:ids[2],
+        name:"Philip", 
+        phone:"98765432",
+        email:"phil@ip.com",
+        bids: [ids[5], ids[6]],
+    }),
+    new Account({
+        _id:ids[3],
+        name:"Hans", 
+        phone:"98765432",
+        email:"Hans@I.var",
+        artworks: ids[0]
+    }),
+    new Account({
+        _id:ids[4],
+        name:"Mikal", 
+        phone:"1243567",
+        email:"Mikal@Fugl.stein",
+        artworks: ids[1]
+    }),
+    new Bid({
+        _id:ids[5],
+        bidAmount:"100",
+        account: ids[2]
+    }),
+    new Bid({
+        _id:ids[6],
+        bidAmount:"200", 
+        account: ids[2]
+    })];
 
-    //Add all new collections to DB
-    collections.forEach(col => dbo.createCollection(col, function(err, res) {}));
-
-    const art = [new artwork('Skrik', 'Munch'), new artwork('Mona Lisa', 'Leonardo DaVinci')];
-    const users = [{name:"Philip", phone:"98765432", email:"email@email.com"},
-                   {name:"Mikal", phone:"12345678", email:"f@uglestein.com"}];
-    const bids = [{bidAmount:"100"}, {bidAmount:"200"}];
-    dbo.collection("Artwork").insertMany(art);
-    dbo.collection("User").insertMany(users);
-    dbo.collection("Bid").insertMany(bids);
-    
-    setTimeout(function(){ db.close(); console.log("Database created!"); }, 2000);
-})
-
-*/
+exports.load = () => {
+    models.forEach(m => m.save(function (err) { if (err) return handleError(err); }));
+}

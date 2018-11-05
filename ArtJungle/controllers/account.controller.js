@@ -1,22 +1,18 @@
 const Account = require('../models/account.model.js');
 
-// Create and Save a new Note
 exports.create = (req, res) => {
-    // Validate request
     if(!req.body) {
         return res.status(400).send({
             message: "Note content can not be empty"
         });
     }
 
-    // Create a Note
     const account = new Account({
         name: req.body.name,
         phone: req.body.phone,
         email: req.body.email
     });
 
-    // Save Note in the database
     account.save()
     .then(data => {
         res.send(data);
@@ -29,6 +25,8 @@ exports.create = (req, res) => {
 
 exports.findAll = (req, res) => {
     Account.find()
+    .populate('bids')
+    .populate('artworks')
     .then(account => {
         res.send(account);
     }).catch(err => {
@@ -41,6 +39,8 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   var accountId = req.params.accountId;
   Account.findOne({_id: accountId})
+    .populate('bids')
+    .populate('artworks')
     .then(account => {
       res.send(account);
     }).catch(err => {

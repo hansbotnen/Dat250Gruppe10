@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+    <% include ../partials/nav %>
+    
+    <div class="display">
+        <img src="skrik_munch.jpg" style="width:30%">
+        <div class="container">
+            <h1><%= art.name %></h1>
+            <p>Artist: <%= art.artist %></p>
+            <p>Current Bid:<%= art.bid.bidAmount %></p>
+            <p>Owner: <%= art.name%></p>
+            <form action="/view_artwork/<%=art.bid.id%>" method="POST">
+                <label>Place bid: </label>
+                <input type="text" name="bidAmount" value="" />
+                <input type="submit" value="Bid">
+            </form>
+            <p>Description: Portrait of me, by me</p>
+
+        </div>       
+    </div>
+    <br>
+</body>
+
+</html>

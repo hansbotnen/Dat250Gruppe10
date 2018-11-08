@@ -1,0 +1,61 @@
+body {
+    font-family: 'Montserrat';
+    text-align: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    float: left;
+    margin: 0 5px 0 20px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+}
+
+.display {
+    text-align: center;
+}
+
+.register {
+    text-align: center;
+}
+
+input, textarea, select, button {
+    width : 150px;
+    margin: 0;
+  
+    -webkit-box-sizing: border-box; /* For legacy WebKit based browsers */
+       -moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
+            box-sizing: border-box;
+  }
+
+.column {
+    float: left; 
+    width: 33.33%; 
+    padding: 5px;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table; 
+}
+
+@media screen and (max-width: 500px) {
+    .column {
+        width: 100%;
+    }
+}
+
+a:link {
+    text-decoration: none;
+}

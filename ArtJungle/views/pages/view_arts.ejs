@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+    <% include ../partials/nav %>
+    
+    <% art.forEach(function(art) { %>
+    <div class="card">
+        <a href="view_artwork/<%= art.id%>">
+            <img src="skrik_munch.jpg" style="width:100%">
+            <div class="container">
+            
+                <h3><%= art.name %></h3>
+                <p>Artist: <%= art.artist %></p>
+                <p>Current Bid:<%= art.bid.bidAmount %></p>
+            </div>
+        </a>
+    </div>
+    <% }); %>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+
+<body>
+    
+    <% include ../partials/nav %>
+    <div class="register">
+        <h1>Set In Artwork</h1>
+
+        <form action="/artworks" method="POST">
+            <label>Name: </label>
+            <input type="text" name="name" value="" /><br />
+            <br/>
+            <label>Artist: </label>
+            <input type="text" name="artist" value="" /><br />
+            <br/>
+            <label>Account: </label>
+            <input type="text" name="account" value="" /><br />
+            <br/>
+            <input type="submit" value="Create Art">
+        </form>
+    </div>
+</body>
+
+</html>

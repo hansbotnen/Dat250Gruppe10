@@ -5,18 +5,24 @@
 
 
 <body>
+    
     <% include ../partials/nav %>
+    <div class="register">
+        <h1>Create an Account</h1>
 
-    <form action="/accounts" method="POST">
-        <label>Name: </label>
-        <input type="text" name="name" value="" /><br />
-        <label>Phone: </label>
-        <input type="text" name="phone" value="" /><br />
-        <label>Email: </label>
-        <input type="text" name="email" value="" /><br />
-        <input type="submit" value="submit">
-    </form>
-
+        <form action="/accounts" method="POST">
+            <label>Name: </label>
+            <input type="text" name="name" value="" /><br />
+            <br/>
+            <label>Phone: </label>
+            <input type="text" name="phone" value="" /><br />
+            <br/>
+            <label>Email: </label>
+            <input type="text" name="email" value="" /><br />
+            <br/>
+            <input type="submit" value="Create Account">
+        </form>
+    </div>
 </body>
 
 </html>

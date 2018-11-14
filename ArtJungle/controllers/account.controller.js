@@ -10,7 +10,8 @@ exports.create = (req, res) => {
     const account = new Account({
         name: req.body.name,
         phone: req.body.phone,
-        email: req.body.email
+        email: req.body.email,
+        password: req.body.password
     });
 
     account.save()
@@ -18,7 +19,7 @@ exports.create = (req, res) => {
         res.send(data);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the Account."
+            message: err.message || "Some error occurred while creating the account."
         });
     });
 };
@@ -31,7 +32,7 @@ exports.findAll = (req, res) => {
         res.send(account);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while retrieving notes."
+            message: err.message || "Some error occurred while retrieving account."
         });
     });
 };

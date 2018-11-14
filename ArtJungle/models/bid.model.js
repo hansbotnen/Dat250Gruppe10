@@ -5,6 +5,10 @@ var BidSchema = mongoose.Schema({
     account: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Account'
+    },
+    artwork: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Artwork'
     }
 }, {
     timestamps: true

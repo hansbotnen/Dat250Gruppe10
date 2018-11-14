@@ -29,6 +29,7 @@ var models = [
         name:"Philip", 
         phone:"98765432",
         email:"phil@ip.com",
+        password: "test1234",
         bids: [ids[5], ids[6]],
     }),
     new Account({
@@ -36,6 +37,7 @@ var models = [
         name:"Hans", 
         phone:"98765432",
         email:"Hans@I.var",
+        password: "test1234",
         artworks: ids[0]
     }),
     new Account({
@@ -43,17 +45,20 @@ var models = [
         name:"Mikal", 
         phone:"1243567",
         email:"Mikal@Fugl.stein",
+        password: "test1234",
         artworks: ids[1]
     }),
     new Bid({
         _id:ids[5],
         bidAmount:"100",
-        account: ids[2]
-    }),
+        account: ids[2],
+        artwork: ids[0]
+   }),
     new Bid({
         _id:ids[6],
         bidAmount:"200", 
-        account: ids[2]
+        account: ids[2],
+        artwork: ids[1]
     })];
 
 exports.load = () => {

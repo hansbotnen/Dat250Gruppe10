@@ -9,4 +9,6 @@ module.exports = (app) => {
    app.delete('/accounts/:accountId', account.deleteOne);
 
    app.post('/accounts/:accountId/update', account.updateOne);
+   
+   app.post('/accounts/authenticate', account.authenticate);
 }

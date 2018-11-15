@@ -13,7 +13,7 @@
             <p>Artist: <%= art.artist %></p>
             <p>Current Bid:<%= art.bid.bidAmount %></p>
             <p>Owner: <%= art.name%></p>
-            <form action="/view_artwork/<%=art.bid.id%>" method="POST">
+            <form action="/bids/<%=art.bid.id%>/update" method="POST">
                 <label>Place bid: </label>
                 <input type="text" name="bidAmount" value="" />
                 <input type="submit" value="Bid">

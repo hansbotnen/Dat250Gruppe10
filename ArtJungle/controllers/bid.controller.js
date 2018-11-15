@@ -64,9 +64,10 @@ exports.findOne = (req, res) => {
   
   exports.updateOne = (req, res) => {
     var bidId = req.params.bidId;
+    console.log(bidId);
     Bid.findOneAndUpdate({_id: bidId}, req.body, {new: true})
       .then(Bid => {
-          res.redirect('artworks');
+          res.redirect('/artworks/' + Bid.artwork._id);
       }).catch(err => {
         res.status(500).send({
           message : err.message || "Some error occurred while retreiving bid"

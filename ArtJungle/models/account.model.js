@@ -5,6 +5,7 @@ const AccountSchema = mongoose.Schema({
     phone: String,
     email: String,
     password: String,
+    photo: String,
     bids: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Bid'

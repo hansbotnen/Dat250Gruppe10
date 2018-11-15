@@ -8,5 +8,5 @@ module.exports = (app) => {
   
      app.delete('/bids/:bidId', bid.deleteOne);
   
-     app.put('/bids/:bidId', bid.updateOne);
+     app.post('/bids/:bidId/update', bid.updateOne);
   }

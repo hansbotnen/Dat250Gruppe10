@@ -29,6 +29,7 @@ var models = [
         name:"Philip", 
         phone:"98765432",
         email:"phil@ip.com",
+        photo:"phil.jpg",
         password: "test1234",
         bids: [ids[5], ids[6]],
     }),
@@ -37,6 +38,7 @@ var models = [
         name:"Hans", 
         phone:"98765432",
         email:"Hans@I.var",
+        photo:"default.jpg",
         password: "test1234",
         artworks: ids[0]
     }),
@@ -45,6 +47,7 @@ var models = [
         name:"Mikal", 
         phone:"1243567",
         email:"Mikal@Fugl.stein",
+        photo:"default.jpg",
         password: "test1234",
         artworks: ids[1]
     }),

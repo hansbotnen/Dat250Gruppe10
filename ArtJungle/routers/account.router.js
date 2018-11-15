@@ -8,5 +8,5 @@ module.exports = (app) => {
 
    app.delete('/accounts/:accountId', account.deleteOne);
 
-   app.put('/accounts/:accountId', account.updateOne);
+   app.post('/accounts/:accountId/update', account.updateOne);
 }

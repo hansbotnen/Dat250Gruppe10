@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+    <% include ../partials/nav %>
+    
+    <div class="display">
+        <div class="container">
+            <img src="<%= account.photo %>" style="width:30%">
+            <form action="/accounts/<%=account._id%>/update" method="POST">
+                <label>Name: </label>
+                <input type="text" name="name" value="<%= account.name %>" /> <br/>
+                <label>Phone: </label>
+                <input type="text" name="phone" value="<%= account.phone %>" /> <br/>
+                <label>Email: </label>
+                <input type="text" name="email" value="<%= account.email %>" /> <br/>
+                <label>Password: </label>
+                <input type="password" name="password" value="<%= account.password %>" /> <br/>
+                <input type="submit" value="Save">
+            </form>
+        </div>       
+    </div>
+    <br>
+</body>
+
+</html>

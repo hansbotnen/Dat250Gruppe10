@@ -1,5 +1,6 @@
 const Artwork = require('../models/artwork.model.js');
 const Account = require('../models/account.model.js');
+const Bid = require('../models/bid.model.js');
 const mongoose = require('mongoose');
 
 exports.create = (req, res) => {
@@ -8,26 +9,35 @@ exports.create = (req, res) => {
     if(!req.body.name || !req.body.artist) {
         res.status(400).send();
     }
+    const bid = new Bid({bidAmount: req.body.bid, account:req.body.account});
+    
     const art = new Artwork({
         _id: artId,
         name: req.body.name, 
         artist: req.body.artist,
         account: req.body.account,
-        bid: req.body.bid
+        bid: bid
     });
+
+    bid.save().then(() =>{}).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the art."
+        });
+    });;
+
 
     art.save() 
     .then(data => {
         Account.findOneAndUpdate({_id: req.body.account}, {artworks: artId}, {new: true})
         .then().catch(err => {
         res.status(500).send({
-          message : err.message || "Some error occurred while retreiving note"
+          message : err.message || "Some error occurred while retreiving art"
         });
       });
-      res.redirect('/artworks')
+      res.redirect('/artworks/' + artId);
     }).catch(err => {
         res.status(500).send({
-            message: err.message || "Some error occurred while creating the Account."
+            message: err.message || "Some error occurred while creating the art."
         });
     });
 };
@@ -79,7 +89,7 @@ exports.updateOne = (req, res) => {
     var artworkId = req.params.artworkId;
     Artwork.findOneAndUpdate({_id: artworkId}, req.body, {new: true})
         .then(artwork => {
-            res.redirect('/artworks')
+            res.redirect('/artworks/' + artworkId);
         }).catch(err => {
         res.status(500).send({
             message : err.message || "Some error occurred while retreiving artwork"

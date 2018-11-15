@@ -43,4 +43,8 @@ app.get('/create_artwork', function(req, res) {
     res.render('./pages/create_artwork');
 });
 
+app.get('/login', function(req, res){
+  res.render('./pages/login');
+});
+
 module.exports = app;

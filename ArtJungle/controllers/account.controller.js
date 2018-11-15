@@ -1,4 +1,5 @@
 const Account = require('../models/account.model.js');
+const bcrypt = require('bcrypt');
 
 exports.create = (req, res) => {
     if(!req.body) {
@@ -7,20 +8,26 @@ exports.create = (req, res) => {
         });
     }
 
-    const account = new Account({
-        name: req.body.name,
-        phone: req.body.phone,
-        email: req.body.email,
-        password: req.body.password
-    });
+    bcrypt.hash(req.body.password, 10).then(function(hash){
+      const account = new Account({
+          name: req.body.name,
+          phone: req.body.phone,
+          email: req.body.email,
+          password: hash
+      });
 
-    account.save()
-    .then(data => {
-        res.redirect('')
+      account.save()
+      .then(data => {
+          res.redirect('')
+      }).catch(err => {
+          res.status(500).send({
+              message: err.message || "Some error occurred while creating the account."
+          });
+      });
     }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while creating the account."
-        });
+      res.status(500).send({
+        message: err.message || "Some error occurred while hashing the password."
+      });
     });
 };
 
@@ -73,4 +80,23 @@ exports.updateOne = (req, res) => {
         message : err.message || "Some error occurred while retreiving note"
       });
     });
-}
+};
+
+exports.authenticate = (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  Account.findOne({email: email})
+    .then(account => {
+      if(bcrypt.compareSync(password, account.password)) {
+        res.send(account);
+      } else {
+        res.status(500).send({
+          message : err.message || "Password doesn't match"
+        });
+      }
+    }).catch(err => {
+      res.status(500).send({
+        message : err.message || "Some error occurred while logging in"
+      });
+    });
+};

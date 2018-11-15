@@ -5,7 +5,19 @@
 
 <body>
     <% include ../partials/nav %>
-    
+    <div class="register">
+        <h1>Login</h1>
+
+        <form action="/accounts/authenticate" method="POST">
+            <label>Email: </label>
+            <input type="text" name="email" value="" /><br />
+            <br/>
+            <label>Password: </label>
+            <input type="password" name="password" value="" /><br />
+            <br/>
+            <input type="submit" value="Login">
+        </form>
+    </div>
 </body>
 
 </html>

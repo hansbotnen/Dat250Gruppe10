@@ -39,60 +39,8 @@ app.get('/create_account', function(req, res) {
     res.render('./pages/create_account');
 });
 
-app.post('/accounts', function(req, res){
-    response = {
-        name : req.body.name,
-        phone : req.body.phone,
-        email : req.body.email
-    };
-
-    console.log(response);
-
-    res.end(JSON.stringify(response));
-});
-
 app.get('/create_artwork', function(req, res) {
     res.render('./pages/create_artwork');
 });
-
-app.post('/artworks', function(req, res) {
-    response = {
-        name : req.body.name,
-        artist : req.body.artist,
-    };
-});
-
-app.get('/view_arts', function(req, res) {
-    Artwork.find()
-    .populate('bid')
-    .populate('account')
-    .then(art => {
-        res.render('pages/view_arts', {
-            art: art
-        });
-    });
-});
-
-app.get('/view_artwork/:id', function(req, res){
-    var artworkId = req.params.id;
-    Artwork.findOne({_id: artworkId})
-    .populate('bid')
-    .populate('account')
-      .then(art => {
-        res.render('pages/view_artwork', {
-            art: art
-        });
-      });
-});
-
-app.post('/view_artwork/:bid', function(req, res){
-    var bidId = req.params.bid;
-    var bidAmount = req.body.bidAmount;
-    Bid.findOneAndUpdate({_id: bidId}, req.body, {new: true})
-      .then(Bid => {
-        res.send(Bid);
-      });
-});
-
 
 module.exports = app;

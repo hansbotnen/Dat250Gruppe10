@@ -16,7 +16,7 @@
     "fs": "0.0.1-security",
     "mongodb": "^3.1.8",
     "mongoose": "^5.3.7",
-    "mongoose-relationship": "^0.1.5",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.6"
   }
 }

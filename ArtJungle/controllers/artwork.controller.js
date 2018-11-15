@@ -12,7 +12,8 @@ exports.create = (req, res) => {
         _id: artId,
         name: req.body.name, 
         artist: req.body.artist,
-        account: req.body.account
+        account: req.body.account,
+        bid: req.body.bid
     });
 
     art.save() 
@@ -23,7 +24,7 @@ exports.create = (req, res) => {
           message : err.message || "Some error occurred while retreiving note"
         });
       });
-        res.send(data);
+      res.redirect('/artworks')
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the Account."
@@ -36,7 +37,9 @@ exports.findAll = (req, res) => {
     .populate('bid')
     .populate('account')
     .then(art => {
-        res.send(art);
+        res.render('pages/view_arts', {
+            art: art
+        });
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving artworks."
@@ -49,8 +52,10 @@ exports.findOne = (req, res) => {
     Artwork.findOne({_id: artworkId})
     .populate('bid')
     .populate('account')
-      .then(artwork => {
-        res.send(artwork);
+      .then(art => {
+        res.render('pages/view_artwork', {
+            art: art
+        });
       }).catch(err => {
         res.status(500).send({
           message : err.message || "Some error occurred while retreiving artwork"
@@ -74,7 +79,7 @@ exports.updateOne = (req, res) => {
     var artworkId = req.params.artworkId;
     Artwork.findOneAndUpdate({_id: artworkId}, req.body, {new: true})
         .then(artwork => {
-        res.send(artwork);
+            res.redirect('/artworks')
         }).catch(err => {
         res.status(500).send({
             message : err.message || "Some error occurred while retreiving artwork"

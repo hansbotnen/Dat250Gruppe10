@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 
     account.save()
     .then(data => {
-        res.send(data);
+        res.redirect('')
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the account."

@@ -9,7 +9,7 @@
     <% art.forEach(function(art) { %>
     <div class="card">
         <a href="artworks/<%= art.id%>">
-            <img src="skrik_munch.jpg" style="width:100%">
+            <img src="<%= art.photo %>" style="width:100%; height:50%">
             <div class="container">
             
                 <h3><%= art.name %></h3>

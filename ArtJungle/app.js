@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const upload = require('express-fileupload');
 const app = express();
 const formidable = require('formidable');
 const Artwork = require('./models/artwork.model.js');
@@ -11,6 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs');
 app.use(morgan("dev"));
+app.use(upload());
 require('./routers/account.router.js')(app);
 require('./routers/artwork.router.js')(app);
 require('./routers/bid.router.js')(app);
@@ -41,6 +43,17 @@ app.get('/create_account', function(req, res) {
 app.get('/create_artwork', function(req, res) {
     res.render('./pages/create_artwork');
 });
+
+app.get('create_artwork', function(req, res) {
+    res.sendFile(path.join(__dirname+'/create_artwork'));
+});
+
+
+app.post('create_artwork', function(req, res) {
+    if (req.files) {
+        console.log(req.files);
+    }
+ });
 
 app.get('/login', function(req, res){
   res.render('./pages/login');

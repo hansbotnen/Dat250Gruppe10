@@ -35,7 +35,11 @@
   .color.red { background-color: red; }
   .color.green { background-color: green; }
   .color.blue { background-color: blue; }
-  .color.yellow { background-color: yellow; }
+  .color.yellow { 
+      background-color: yellow; 
+      border: 1px solid;
+  }
+  .color.purple {background-color: purple}
   .color.white { 
       background-color: white;
       border: 1px solid;

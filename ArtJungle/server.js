@@ -1,5 +1,4 @@
 const app = require('./app');
-//const port = 3000;
 const dbConfig = require('./config.js');
 const mongoose = require('mongoose');
 const loadData = require('./LoadData.js');

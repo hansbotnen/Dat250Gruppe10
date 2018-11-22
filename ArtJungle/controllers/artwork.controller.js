@@ -10,12 +10,15 @@ exports.create = (req, res) => {
         res.status(400).send();
     }
     const bid = new Bid({bidAmount: req.body.bid, account:req.body.account});
-    
+    if(req.body.photo == null)
+          req.body.photo = "default.jpg";
+
     const art = new Artwork({
         _id: artId,
         name: req.body.name, 
         artist: req.body.artist,
         account: req.body.account,
+        photo: req.body.photo,
         bid: bid
     });
 

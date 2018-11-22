@@ -18,15 +18,25 @@ var models = [
         _id:ids[0],
         name:"Skrik",
         artist:"Munch",
+        photo:"skrik_munch.jpg",
         account: ids[3],
         bid: ids[5]
     }),
     new Artwork({
         _id:ids[1],
-        name:"Listhaug",
-        artist:"Mikal",
+        name:"Van Gogh",
+        artist:"Vincent",
+        photo:"van_gogh.jpg",
         account: ids[4],
         bid: ids[6]
+    }),
+    new Artwork({
+        _id:ids[2],
+        name:"Mona Lisa",
+        artist:"Lisa",
+        photo:"mona_lisa.jpg",
+        account: ids[2],
+        bid: ids[4]
     }),
     new Account({
         _id:ids[2],
@@ -55,6 +65,12 @@ var models = [
         password: hashPassword("test1234"),
         artworks: ids[1]
     }),
+    new Bid({
+        _id:ids[4],
+        bidAmount:"100",
+        account: ids[1],
+        artwork: ids[2]
+   }),
     new Bid({
         _id:ids[5],
         bidAmount:"100",

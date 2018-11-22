@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const ArtworkSchema = mongoose.Schema({
     name: String,
     artist: String,
+    photo: String,
     account: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Account'

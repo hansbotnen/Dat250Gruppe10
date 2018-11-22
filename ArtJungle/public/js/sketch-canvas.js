@@ -9,7 +9,7 @@
   var colors = document.getElementsByClassName('color');
   var context = canvas.getContext('2d');
 
-
+  var prevX = 0, prevY = 0, currX = 0, currY = 0;
    
   var current = {
     color: 'black'
@@ -37,7 +37,7 @@
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = 2;
+    context.lineWidth = 4;
     context.stroke();
     context.closePath();
 
@@ -56,21 +56,32 @@
 
   function onMouseDown(e){
     drawing = true;
-    current.x = e.clientX;
-    current.y = e.clientY;
+
+    prevX = currX;
+    prevY = currY;
+   // drawLine(prevX, prevY, prevX, prevY, current.color,true);
+   var pos = getPos(e);
+   currX = pos.x;
+   currY = pos.y;
+   context.fillStyle = current.color;
+   context.arc(currX, currY, 2.5, 0, 2*Math.PI, false);
+   context.fill()
   }
 
   function onMouseUp(e){
     if (!drawing) { return; }
     drawing = false;
-    drawLine(current.x, current.y, e.clientX, e.clientY, current.color, true);
   }
 
   function onMouseMove(e){
     if (!drawing) { return; }
-    drawLine(current.x, current.y, e.clientX, e.clientY, current.color, true);
-    current.x = e.clientX;
-    current.y = e.clientY;
+
+    prevX = currX;
+    prevY = currY;
+    var pos = getPos(e);
+    currX = pos.x;
+    currY = pos.y;
+    drawLine(prevX, prevY, currX, currY, current.color,true);
   }
 
   function onColorUpdate(e){
@@ -107,4 +118,11 @@
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  function getPos(e) {
+    var rect = canvas.getBoundingClientRect();
+    var x = 2 * (e.clientX - rect.left);
+    var y = 2 *(e.clientY - rect.top);
+
+    return {x, y}
+  }
 })();

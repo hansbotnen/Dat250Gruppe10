@@ -1,6 +1,7 @@
 body {
     font-family: 'Montserrat';
     text-align: center;
+    border: 1px solid;
 }
 
 .card {

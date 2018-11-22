@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <% include ../partials/head %>
+
+    <body>
+
+        <% include ../partials/nav %>
+        <canvas class="whiteboard"></canvas>
+
+        <div class="colors">
+            <div class="color black"></div>
+            <div class="color red"></div>
+            <div class="color green"></div>
+            <div class="color blue"></div>
+            <div class="color yellow"></div>
+            <div class="color white"></div>
+        </div>
+
+        <button onclick="clearCanvas()">Clear canvas</button>
+
+        <button id="btndownload">Download canvas</button>
+        
+        <script>
+            var canvas = document.getElementsByClassName('whiteboard')[0];
+            var context = canvas.getContext('2d');
+              
+            function clearCanvas() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+            }
+
+            var download = document.getElementById('btndownload');
+            download.onclick = function(){
+                var link = document.createElement('a'), e;
+                link.download = "masterpiece.png";
+                
+                //Prepare the "download"
+                link.href = canvas.toDataURL("image/png;base64");
+                
+                // create a "fake" click-event to trigger the download
+                if (document.createEvent) {
+                    e = document.createEvent("MouseEvents");
+                    e.initMouseEvent("click", true, true, window,
+                                    0, 0, 0, 0, 0, false, false, false,
+                                    false, 0, null);
+
+                    link.dispatchEvent(e);
+                } else if (link.fireEvent) {
+                    link.fireEvent("onclick");
+                }
+            }
+        </script>
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/sketch-canvas.js"></script>
+    </body>
+</html>

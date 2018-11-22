@@ -6,7 +6,6 @@ const formidable = require('formidable');
 const Artwork = require('./models/artwork.model.js');
 const Bid = require('./models/bid.model.js');
 
-
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -46,5 +45,9 @@ app.get('/create_artwork', function(req, res) {
 app.get('/login', function(req, res){
   res.render('./pages/login');
 });
+
+app.get('/sketch', function(req, res){
+    res.render('./pages/sketch');
+})
 
 module.exports = app;

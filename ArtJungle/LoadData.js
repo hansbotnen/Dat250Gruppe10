@@ -43,7 +43,7 @@ var models = [
         name:"Philip",
         phone:"98765432",
         email:"phil@ip.com",
-        photo:"phil.jpg",
+        photo:"default.jpg",
         password: hashPassword("test1234"),
         bids: [ids[5], ids[6]],
     }),

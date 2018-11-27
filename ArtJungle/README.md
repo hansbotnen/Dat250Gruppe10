@@ -9,8 +9,8 @@ Download and install Node.js version 8.12.0:
 
 - WINDOWS: Download and run .msi file: https://nodejs.org/download/release/v8.12.0/
 - MAC: recommended to use homebrew, simply use command "brew install node@8.12.0"
-- LLINUX: use command: "curl -sL https://deb.nodesource.com/setup_8.12.0 | sudo -E bash -"
-	  then command: "sudo apt-get install nodejs npm"
+- LINUX: use command: "curl -sL https://deb.nodesource.com/setup_8.12.0 | sudo -E bash -"
+	 then command: "sudo apt-get install nodejs npm"
 
 
 Go to the folder ArtJungle and run the command "npm install"

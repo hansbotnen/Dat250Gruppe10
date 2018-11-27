@@ -1,0 +1,77 @@
+\section{Test Environment and Experimental Results}
+\label{sec:experiments}
+
+\subsection{Test bed}
+Our test-bed will be our personal computers, whom all run the following configurations:
+\begin{listing}
+Web Server: Node.js HTTP-module (Express) \newline
+Database: MongoDB Atlas\newline
+Operative System: Windows 10 \newline
+Browser: Google Chrome \newline
+Programming Language: JavaScript
+\end{listing}
+\\\\
+This test-bed is where we will do the development of the prototype. We will be testing the resilience of the prototype in a separate test-environment, in a virtual machine. More information about this in the next subsection.
+\\\\
+There were little to no problems with setting up the server and database connection for our test-bed. We started out with a local database, and migrated to a global MongoDB Atlas database once we had everything in place with the local database. We used some different software for actually creating the code for the prototype (Visual Studio Code and Atom), but this was just about personal preference and did not affect our development experience. 
+
+\subsection{Test environment}
+We wanted to run the application on a separate test-environment, to see if the prototype worked in another environment as well. We used VirtualBox to create the test-environment in a virtual machine with the following configurations:
+\begin{listing}
+Web Server: Node.js HTTP-module (Express) \newline
+Database: MongoDB Atlas \newline
+Operative System: Ubuntu Linux 64-bit \newline
+Browser: Firefox \newline
+Programming Language: JavaScript
+\end{listing}
+\\\\
+Setting up the web application for our Linux Ubuntu test-environment was a simple task. All we had to do was install the right version of node (v8.12.0), install npm, clone the repository, use the "npm install" command in the folder containing the package.json file, and run the server script.
+\\\\
+Starting the server was no different than starting the server in windows, and the same went for connecting to the MongoDB database. We had some struggles with running the local database on other operating systems than windows, but ever since we migrated to a global MongoDB Atlas database, this has not been an issue for different environments. 
+\\\\
+Once everything was up and running, we could test our prototype in this new environment. The first thing to notice is that our test-environment uses Firefox, unlike our test-beds that run Google Chrome. This was not a problem for our application, as everything seemed to load properly, and looked as it should on the front-end side of the application. All functionality was working as intended, and even though the prototype was running on a virtual machine with limited resources, there was no sign of any drop in the performance of the application.
+
+\subsection{Experiment overview}
+Node.js is known for its power with real-time web applications, therefore our intention was to create some real-time functionality in our prototype and see how well it worked. For evaluating this experiment, we will look at how simple it was to create the desired functionality and look at the performance of the functionality under stress in the test-environment.
+\\\\
+Creating a real-time web application means that we will take advantage of Node.js concurrent programming abilities to develop some functionality that can be accessed and used by multiple users at the same time. Some examples of such functionality would be a live chat, live stream, etc. Since we went for an "art"-theme for our application, we decided it would be fun to create a live-drawing application (as shown in section 3.1), where multiple people can draw something at the same time online, save it, and put it up for auction.
+
+\subsection{Experiment results}
+Creating the drawing functionality did not require much implementation. As most things in Node.js, npm does most of the hard work for you. We used a package setting up the socket, where you installed the package called socket.io using npm, and then used some lines of code to deploy the socket as shown below. \cite{instructions:socketio}
+
+\begin{minted}{JavaScript}
+
+...
+const io = require('socket.io')(server);
+...
+function onConnection(socket){
+    socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+  }
+  
+io.on('connection', onConnection);
+...
+\end{minted}
+
+Socket.io's GitHub page \cite{instructions:socketio} also has an example of a real-time drawing application, which was used to create our version of it in our application.
+\\\\
+For stress testing, we are trying to open up several instances of the sketch board at the same time on multiple computers (test environment and test bed computer, connected through IP address on LAN), and try to draw something at the same time, and see how it affects the performance. Our expectations of this is that it will behave normally up until about 50 windows each, where it might become very slow and unresponsive, or even freeze.
+\\
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llrrrrrr}
+  Windows open & Result
+  \\ \hline \hline
+1 & The default experience of the functionality \\ \hline 
+25 & Smooth, no decrease in performance \\   
+50 & Smooth, no decrease in performance \\
+75 & Very slight lag at the start of drawing, smooth afterwards\\  
+100 & Very clear lag at the start of drawing, smooth afterwards\\
+125 & About 0.5 to 1 second delay before the drawing responds, less smooth overall\\  
+\hline \hline
+\end{tabular}
+\caption{Stress test results}
+\label{tab:results}
+\end{table}
+
+As we can see from our results in table 1, we started to notice some performance issue around 75 open windows. At 125 we stopped the test because now it starting to delay up to 1 second and the general experience started to be less smooth, and we were starting to close in on the limit of possible open windows for our VM at this point. Our application held up to our small stress-test very well, where it still performed quite well at 100+ open windows (it is entirely possible that having 100+ open windows makes the entire machine slow down, and the application itself was just as fast as with 2 windows). 

@@ -1,0 +1,97 @@
+\documentclass[11pt]{article}
+
+\usepackage{a4wide}
+\usepackage{mathptm}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{tkz-graph}
+\usetikzlibrary{shapes.misc, positioning}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{minted}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks,citecolor=red,urlcolor=blue,bookmarks=false,hypertexnames=true]{hyperref} 
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+\setlength{\parindent}{0pt}
+
+
+
+\begin{document}
+
+
+\title{Software Technology Evaluation Project}
+
+\author{Hans I. Botnen, Mikal Fuglestein, Joakim M. Grutle, Philip T. Hoang}
+
+\maketitle
+
+\begin{abstract}
+    The task for this project is to evaluate a software technology and the goal is to gain more knowledge about the evaluated technology. By evaluating and understanding a software technology, we will find out how and why such a technology is used. The software technology to be evaluated for this project is Node.js. An entirely new prototype web application inspired by our previous project in the course were created with both frontend and backend written in JavaScript, the language used in Node.js. Even though the project report and evaluation is based on Node.js, some other technologies are used in the prototype to make it work. The prototype is connected to an external database and is running a server from Node.js. The report goes in details about the Node.js and the prototype,the development and testing of the prototype, as well as the evaluation of our results. The prototype can be found in the group's GitHub repository \cite{prototype:repo}, in the folder ArtJungle.
+\end{abstract}
+\clearpage
+%input{commands}
+\clearpage
+\input{sections/introduction}
+\clearpage
+\input{sections/background}
+\input{sections/prototype}
+\input{sections/experiments}
+\input{sections/conclusion}
+\clearpage
+\bibliographystyle{unsrtnat}
+\bibliography{references}
+
+\end{document}

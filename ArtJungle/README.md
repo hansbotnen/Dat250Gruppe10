@@ -1,4 +1,4 @@
-Dat250 group assignment: Node.js
+# Dat250 group assignment: Node.js
 
 How to use:
 
